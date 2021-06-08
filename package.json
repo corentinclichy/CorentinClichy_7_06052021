@@ -1,0 +1,22 @@
+{
+  "name": "projet7",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch style/main.scss:public/style/main.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corentinclichy/CorentinClichy_7_06052021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/corentinclichy/CorentinClichy_7_06052021/issues"
+  },
+  "homepage": "https://github.com/corentinclichy/CorentinClichy_7_06052021#readme",
+  "dependencies": {
+    "bootstrap": "^5.0.1"
+  }
+}
