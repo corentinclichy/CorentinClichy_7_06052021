@@ -1,0 +1,22 @@
+body {
+  @include Lato;
+}
+
+h1 {
+  @include DMSans;
+}
+
+h2,
+h3,
+h4,
+h5 {
+  @include Lato;
+}
+
+ul {
+  @include Lato;
+}
+
+p {
+  @include Roboto;
+}

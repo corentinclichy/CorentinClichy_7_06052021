@@ -1,0 +1,77 @@
+.btn-category {
+  color: white;
+  border-radius: 5px;
+  position: relative;
+  width: 200px;
+  &--ingredients {
+    // flex: 1;
+    background-color: $blue;
+  }
+  &--appareils {
+    background-color: $green;
+  }
+  &--ustensiles {
+    background-color: $orange;
+  }
+
+  .btn {
+    color: white;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    &:hover {
+      color: white;
+    }
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+    input {
+      outline: none;
+      width: 100%;
+      height: 100%;
+      padding: 1rem 0.5rem;
+      background-color: transparent;
+      border: none;
+      color: white;
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+    i {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    top: -10px !important;
+    box-shadow: none;
+    border: none;
+    &--ingredients {
+      flex: 1;
+      background-color: $blue !important;
+    }
+    &--appareils {
+      background-color: $green !important;
+    }
+    &--ustensiles {
+      background-color: $orange !important;
+    }
+    .wrapper {
+      .dropdown-item {
+        color: rgba(255, 255, 255, 0.705);
+        &:hover {
+          background-color: transparent;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.showFilter {
+  flex: 1;
+}

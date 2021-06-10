@@ -32,7 +32,7 @@
         <h1 class="text-center">Les petits plats</h1>
       </header>
 
-      <div class="search p-3 d-flex mt-3">
+      <div class="search px-3 d-flex mt-3">
         <input
           class="search__input bg-transparent align-center"
           type="text"
@@ -44,87 +44,156 @@
         </button>
       </div>
 
-      <div class="badges d-flex mt-3">
-        <button class="btn btn-primary px-3">
-          <span class="pe-5">Coco</span>
-          <i class="far fa-times-circle"></i>
-        </button>
+      <div class="badges d-flex mt-3 gap-3">
+        <!-- GENERATE BADGES -->
       </div>
 
       <div class="categories d-flex mt-3">
-        <div class="btn-category me-3">
+        <div class="btn-category btn-category--ingredients me-3">
           <button
             type="button"
-            class="btn btn-ingredients btn-primary fs-5 p-3 py-4"
-            data-bs-toggle="dropdown"
+            class="btn w-100 fs-5 p-0"
             aria-expanded="false"
+            data-bs-toggle="dropdown"
           >
-            <span class="pe-5">Ingrédients</span>
+            <input
+              placeholder="Ingrédients"
+              name="ingrédient"
+              class="filter-input pe-5"
+            />
             <i class="fas fa-chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" style="">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
+          <ul class="dropdown-menu dropdown-menu--ingredients">
+            <div
+              class="
+                wrapper
+                ingredients-list
+                d-flex
+                w-100
+                flex-wrap
+                justify-content-between
+              "
+            >
+              <li>
+                <a class="dropdown-item dropdown-item--ingredients" href="#"
+                  >Action</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item dropdown-item--ingredients" href="#"
+                  >Another action</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item dropdown-item--ingredients" href="#"
+                  >Something else here</a
+                >
+              </li>
+            </div>
           </ul>
         </div>
-
-        <div class="btn-category me-3">
+        <div class="btn-category btn-category--appareils me-3">
           <button
             type="button"
-            class="btn btn-appareils fs-5 p-3 py-4"
-            data-bs-toggle="dropdown"
+            class="btn w-100 fs-5 p-0"
             aria-expanded="false"
+            data-bs-toggle="dropdown"
           >
-            <span class="pe-5">Appareils</span>
+            <input
+              placeholder="Appareils"
+              name="appareil"
+              class="filter-input pe-5"
+            />
             <i class="fas fa-chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" style="">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
+          <ul class="dropdown-menu dropdown-menu--appareils">
+            <div
+              class="
+                wrapper
+                appareils-list
+                d-flex
+                w-100
+                flex-wrap
+                justify-content-between
+              "
+            >
+              <li>
+                <a class="dropdown-item dropdown-item--appareils" href="#"
+                  >Action</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item dropdown-item--appareils" href="#"
+                  >Another action</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item dropdown-item--appareils" href="#"
+                  >Something else here</a
+                >
+              </li>
+            </div>
           </ul>
         </div>
-
-        <div class="btn-category me-3">
+        <div class="btn-category btn-category--ustensiles me-3">
           <button
             type="button"
-            class="btn btn-ustensiles fs-5 p-3 py-4"
+            class="btn w-100 fs-5 p-0"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <span class="pe-3">Ustensiles</span>
+            <input
+              placeholder="Ustensiles"
+              name="ustensile"
+              class="filter-input pe-5"
+            />
             <i class="fas fa-chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" style="">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
+          <ul class="dropdown-menu dropdown-menu--ustensiles">
+            <div
+              class="
+                wrapper
+                ustensiles-list
+                d-flex
+                w-100
+                flex-wrap
+                justify-content-between
+              "
+            >
+              <li>
+                <a class="dropdown-item dropdown-item--ustensiles" href="#"
+                  >Action</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item dropdown-item--ustensiles" href="#"
+                  >Another action</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item dropdown-item--ustensiles" href="#"
+                  >Something else here</a
+                >
+              </li>
+            </div>
           </ul>
         </div>
       </div>
 
-      <main class="recipes d-flex flex-wrap gap-5 mt-3">
-        <div class="card" >
-          <div class="card__image">
-          </div>
+      <main class="recipes d-flex flex-wrap justify-content-between gap-5 mt-3">
+        <div class="card">
+          <div class="card__image"></div>
           <div class="card-body">
             <div class="card-headings d-flex justify-content-between mb-3">
               <h5 class="card-title p-0 m-0 fw-light">Limonade de coco</h5>
               <div class="card-time d-flex align-items-center fw-bold">
                 <i class="far fa-clock pe-1"></i>
-                <p class="p-0 m-0">10 min</pc>
+                <p class="p-0 m-0">10 min</p>
               </div>
             </div>
 
             <div class="card-text d-flex gap-3">
-              <ul class="card-ingredients p-0 m-0 ">
+              <ul class="card-ingredients p-0 m-0">
                 <li><strong>Lait de coco:</strong> 400ml</li>
                 <li><strong>Jus de citron:</strong> 2</li>
                 <li><strong>Créme de coco:</strong> 4 cuillères</li>
@@ -139,20 +208,19 @@
             </div>
           </div>
         </div>
-        <div class="card" >
-          <div class="card__image">
-          </div>
+        <div class="card">
+          <div class="card__image"></div>
           <div class="card-body">
             <div class="card-headings d-flex justify-content-between mb-3">
               <h5 class="card-title p-0 m-0 fw-light">Limonade de coco</h5>
               <div class="card-time d-flex align-items-center fw-bold">
                 <i class="far fa-clock pe-1"></i>
-                <p class="p-0 m-0">10 min</pc>
+                <p class="p-0 m-0">10 min</p>
               </div>
             </div>
 
             <div class="card-text d-flex gap-3">
-              <ul class="card-ingredients p-0 m-0 ">
+              <ul class="card-ingredients p-0 m-0">
                 <li><strong>Lait de coco:</strong> 400ml</li>
                 <li><strong>Jus de citron:</strong> 2</li>
                 <li><strong>Créme de coco:</strong> 4 cuillères</li>
@@ -167,20 +235,19 @@
             </div>
           </div>
         </div>
-        <div class="card" >
-          <div class="card__image">
-          </div>
+        <div class="card">
+          <div class="card__image"></div>
           <div class="card-body">
             <div class="card-headings d-flex justify-content-between mb-3">
               <h5 class="card-title p-0 m-0 fw-light">Limonade de coco</h5>
               <div class="card-time d-flex align-items-center fw-bold">
                 <i class="far fa-clock pe-1"></i>
-                <p class="p-0 m-0">10 min</pc>
+                <p class="p-0 m-0">10 min</p>
               </div>
             </div>
 
             <div class="card-text d-flex gap-3">
-              <ul class="card-ingredients p-0 m-0 ">
+              <ul class="card-ingredients p-0 m-0">
                 <li><strong>Lait de coco:</strong> 400ml</li>
                 <li><strong>Jus de citron:</strong> 2</li>
                 <li><strong>Créme de coco:</strong> 4 cuillères</li>
@@ -195,20 +262,19 @@
             </div>
           </div>
         </div>
-        <div class="card" >
-          <div class="card__image">
-          </div>
+        <div class="card">
+          <div class="card__image"></div>
           <div class="card-body">
             <div class="card-headings d-flex justify-content-between mb-3">
               <h5 class="card-title p-0 m-0 fw-light">Limonade de coco</h5>
               <div class="card-time d-flex align-items-center fw-bold">
                 <i class="far fa-clock pe-1"></i>
-                <p class="p-0 m-0">10 min</pc>
+                <p class="p-0 m-0">10 min</p>
               </div>
             </div>
 
             <div class="card-text d-flex gap-3">
-              <ul class="card-ingredients p-0 m-0 ">
+              <ul class="card-ingredients p-0 m-0">
                 <li><strong>Lait de coco:</strong> 400ml</li>
                 <li><strong>Jus de citron:</strong> 2</li>
                 <li><strong>Créme de coco:</strong> 4 cuillères</li>
@@ -223,20 +289,19 @@
             </div>
           </div>
         </div>
-        <div class="card" >
-          <div class="card__image">
-          </div>
+        <div class="card">
+          <div class="card__image"></div>
           <div class="card-body">
             <div class="card-headings d-flex justify-content-between mb-3">
               <h5 class="card-title p-0 m-0 fw-light">Limonade de coco</h5>
               <div class="card-time d-flex align-items-center fw-bold">
                 <i class="far fa-clock pe-1"></i>
-                <p class="p-0 m-0">10 min</pc>
+                <p class="p-0 m-0">10 min</p>
               </div>
             </div>
 
             <div class="card-text d-flex gap-3">
-              <ul class="card-ingredients p-0 m-0 ">
+              <ul class="card-ingredients p-0 m-0">
                 <li><strong>Lait de coco:</strong> 400ml</li>
                 <li><strong>Jus de citron:</strong> 2</li>
                 <li><strong>Créme de coco:</strong> 4 cuillères</li>
@@ -251,20 +316,19 @@
             </div>
           </div>
         </div>
-        <div class="card" >
-          <div class="card__image">
-          </div>
+        <div class="card">
+          <div class="card__image"></div>
           <div class="card-body">
             <div class="card-headings d-flex justify-content-between mb-3">
               <h5 class="card-title p-0 m-0 fw-light">Limonade de coco</h5>
               <div class="card-time d-flex align-items-center fw-bold">
                 <i class="far fa-clock pe-1"></i>
-                <p class="p-0 m-0">10 min</pc>
+                <p class="p-0 m-0">10 min</p>
               </div>
             </div>
 
             <div class="card-text d-flex gap-3">
-              <ul class="card-ingredients p-0 m-0 ">
+              <ul class="card-ingredients p-0 m-0">
                 <li><strong>Lait de coco:</strong> 400ml</li>
                 <li><strong>Jus de citron:</strong> 2</li>
                 <li><strong>Créme de coco:</strong> 4 cuillères</li>
@@ -279,20 +343,19 @@
             </div>
           </div>
         </div>
-        <div class="card" >
-          <div class="card__image">
-          </div>
+        <div class="card">
+          <div class="card__image"></div>
           <div class="card-body">
             <div class="card-headings d-flex justify-content-between mb-3">
               <h5 class="card-title p-0 m-0 fw-light">Limonade de coco</h5>
               <div class="card-time d-flex align-items-center fw-bold">
                 <i class="far fa-clock pe-1"></i>
-                <p class="p-0 m-0">10 min</pc>
+                <p class="p-0 m-0">10 min</p>
               </div>
             </div>
 
             <div class="card-text d-flex gap-3">
-              <ul class="card-ingredients p-0 m-0 ">
+              <ul class="card-ingredients p-0 m-0">
                 <li><strong>Lait de coco:</strong> 400ml</li>
                 <li><strong>Jus de citron:</strong> 2</li>
                 <li><strong>Créme de coco:</strong> 4 cuillères</li>
@@ -309,6 +372,8 @@
         </div>
       </main>
     </div>
+
+    <script src="./js/index.js" type="module"></script>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

@@ -1,13 +1,21 @@
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "vendors/boostrap";
 
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import "abstract/typography";
+@import "abstract/color";
+@import "abstract/mediaqueries";
+@import "abstract/animations";
+
+@import "components/searchForm";
+@import "components/btn-filter";
+@import "components/badge";
+
+@import "pages/home";
+
+@import "base/typography";
+@import "base/base";
 
 body {
-}
-
-header {
-  color: #d04f4f;
-  font-family: "Lato", sans-serif;
+  font-size: 1rem;
 }
 
 .logo {
@@ -21,42 +29,6 @@ header {
   overflow: hidden;
   background-color: #e7e7e7;
   align-items: center;
-
-  .search__input {
-    border: none;
-    height: 100%;
-    flex: 1;
-    &:focus {
-      outline: none;
-    }
-    &::placeholder {
-      color: rgba(0, 0, 0, 0.26);
-    }
-
-    .search__btn {
-      i {
-      }
-    }
-  }
-}
-
-.categories {
-  font-family: "Lato", sans-serif;
-  color: white;
-
-  .btn {
-    color: white;
-  }
-  .btn-appareils {
-    background-color: #68d9a4;
-  }
-
-  .btn-ustensiles {
-    background-color: #ed6454;
-  }
-  button {
-    border-radius: 5px;
-  }
 }
 
 .recipes {

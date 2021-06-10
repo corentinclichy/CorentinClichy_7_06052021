@@ -1,0 +1,29 @@
+$sm: "640px";
+$md: "768px";
+$lg: "1024px";
+$xl: "1280px";
+$xxl: "1536px";
+
+@mixin size($size) {
+  @if $size == "sm" {
+    @media (min-width: $sm) {
+      @content;
+    }
+  } @else if $size == "md" {
+    @media (min-width: $md) {
+      @content;
+    }
+  } @else if $size == "lg" {
+    @media (min-width: $lg) {
+      @content;
+    }
+  } @else if $size == "xl" {
+    @media (min-width: $xl) {
+      @content;
+    }
+  } @else if $size == "xxl" {
+    @media (min-width: $xxl) {
+      @content;
+    }
+  }
+}

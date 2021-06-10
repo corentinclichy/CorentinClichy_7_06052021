@@ -1,0 +1,31 @@
+.badges {
+  outline: none;
+  .badge {
+    font-weight: 400;
+    &--ingredients {
+      background-color: $blue !important;
+      &:hover {
+        background-color: darken($blue, 15%) !important;
+        color: white;
+      }
+    }
+    &--appareils {
+      background-color: $green !important;
+      &:hover {
+        background-color: darken($green, 15%) !important;
+        color: white;
+      }
+    }
+    &--ustensiles {
+      background-color: $orange !important;
+      &:hover {
+        background-color: darken($orange, 15%) !important;
+        color: white;
+      }
+    }
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+//DMSans
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+
+//lato
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+//Roboto
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+@mixin DMSans {
+  font-family: "DM Sans", sans-serif;
+}
+
+@mixin Lato {
+  font-family: "Lato", sans-serif;
+}
+
+@mixin Roboto {
+  font-family: "Roboto", sans-serif;
+}
