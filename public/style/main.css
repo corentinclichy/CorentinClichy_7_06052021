@@ -5,6 +5,7 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -10729,9 +10730,74 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-h1, .h1 {
-  color: red;
-  font-size: 20rem;
+header {
+  color: #d04f4f;
+  font-family: "Lato", sans-serif;
+}
+
+.logo {
+  height: fit-content;
+  width: 30%;
+}
+
+.search {
+  border-radius: 5px;
+  display: flex;
+  overflow: hidden;
+  background-color: #e7e7e7;
+  align-items: center;
+}
+.search .search__input {
+  border: none;
+  height: 100%;
+  flex: 1;
+}
+.search .search__input:focus {
+  outline: none;
+}
+.search .search__input::placeholder {
+  color: rgba(0, 0, 0, 0.26);
+}
+.categories {
+  font-family: "Lato", sans-serif;
+  color: white;
+}
+.categories .btn {
+  color: white;
+}
+.categories .btn-appareils {
+  background-color: #68d9a4;
+}
+.categories .btn-ustensiles {
+  background-color: #ed6454;
+}
+.categories button {
+  border-radius: 5px;
+}
+
+.recipes .card {
+  width: 380px;
+}
+.recipes .card .card__image {
+  height: 178px;
+  background-color: #c7bebe;
+}
+.recipes .card .card-body {
+  background-color: #e7e7e7;
+}
+.recipes .card .card-body .card-headings .card-time p {
+  font-size: 18px;
+}
+.recipes .card .card-body .card-headings .card-time i {
+  font-size: 18px;
+}
+.recipes .card .card-body .card-text .card-ingredients {
+  list-style: none;
+  font-size: 12px;
+}
+.recipes .card .card-body .card-text .card-recipeSteps {
+  font-size: 12px;
+  line-height: 12px;
 }
 
 /*# sourceMappingURL=main.css.map */
