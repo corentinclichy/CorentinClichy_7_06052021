@@ -41,7 +41,10 @@
       }
     }
     i {
+      position: absolute;
+      right: 10px;
       margin-right: 0.5rem;
+      pointer-events: none;
     }
   }
 

@@ -11,10 +11,10 @@ class Recipe {
     this.helpers = new Helpers();
   }
 
-  listOfFilter(filterName, filterItemName) {
+  listOfFilter(filterName, filterItemName, input) {
     let filteredArray = new Set();
 
-    console.log(this.recipes);
+    /// Input empty or input is not empty
 
     this.recipes.map((recipe) => {
       if (Array.isArray(recipe[filterName])) {
@@ -29,7 +29,16 @@ class Recipe {
         filteredArray.add(recipe[filterItemName]);
       }
     });
-    return filteredArray;
+
+    if (input === undefined) {
+      return filteredArray;
+    } else {
+      filteredArray = [...filteredArray];
+
+      const search = new Search(input, filteredArray);
+      const searchFilterItems = search.filterSearch();
+      return searchFilterItems;
+    }
   }
 
   listOfRecipes(input) {

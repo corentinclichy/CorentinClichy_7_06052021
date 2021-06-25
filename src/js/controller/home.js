@@ -9,25 +9,23 @@ class HomeController {
   }
 
   showfilter(el) {
-    el.focus();
-    //Open dropdown
-    el.parentNode.classList.add("show");
-    el.parentNode.parentNode.children[1].classList.add("show");
     //Add showFilter class allowing element to flex:1
-    el.parentNode.parentNode.classList.add("showFilter");
+
+    setTimeout(() => {
+      el.focus();
+      el.placeholder = `Recherche un ${el.name}`;
+      if (el.parentNode.classList.contains("show")) {
+        el.parentNode.parentNode.classList.add("showFilter");
+      }
+    }, 0);
+
     //Change Placeholder
-    el.placeholder = `Recherche un ${el.name}`;
   }
 
   resetFilter(el) {
     //select the .btn-category
-    let btn = el.parentNode.parentNode;
-    //remove the showfilter
-    btn.classList.remove("showFilter");
 
-    // Close dropdown
-    btn.children[1].classList.remove("show");
-    btn.children[0].classList.remove("show");
+    el.parentNode.parentNode.classList.remove("showFilter");
 
     //Change the placeholder
     let name = el.name;
@@ -41,8 +39,6 @@ class HomeController {
     let typeOfBadge;
     let badges;
     //reset the container
-    console.log(container);
-    console.log(el.target);
 
     if (el.target.classList.contains("dropdown-item--ingredient"))
       typeOfBadge = "ingredients";
@@ -54,7 +50,6 @@ class HomeController {
       typeOfBadge = "ustensiles";
 
     let index = container.children.length;
-    console.log(typeOfBadge);
     container.innerHTML += this.markup.badge(index, typeOfBadge, badgeName);
 
     badges = document.querySelectorAll(".badge");
@@ -65,26 +60,26 @@ class HomeController {
   }
 
   _deleteBadge(badge, container) {
-    console.log(container);
     let closeBtn = badge.children[1];
     closeBtn.addEventListener("click", (e) => {
-      console.log(e.target);
       let badgeToDelete = e.target.parentNode;
       container.removeChild(badgeToDelete);
     });
   }
 
-  showFilterItems(container, filterName, filterItemName) {
-    const list = this.recipeHandler.listOfFilter(filterName, filterItemName);
+  showFilterItems(container, filterName, filterItemName, input) {
+    const list = this.recipeHandler.listOfFilter(
+      filterName,
+      filterItemName,
+      input
+    );
     container.innerHTML = "";
     list.forEach((item) => {
       container.innerHTML += this.markup.filterItem(filterItemName, item);
     });
 
-    console.log(container.children);
     for (let item of container.children) {
       item.addEventListener("click", (e) => {
-        console.log("helleo");
         this._addBadge(e);
       });
     }
@@ -93,8 +88,6 @@ class HomeController {
   showRecipes(container, input) {
     const list = this.recipeHandler.listOfRecipes(input);
     container.innerHTML = "";
-
-    console.log(list);
 
     list.map((item) => {
       const recipe = {
@@ -106,15 +99,6 @@ class HomeController {
       };
       container.innerHTML += this.markup.recipeCard(recipe);
     });
-  }
-
-  ///Search
-
-  _getInput(input) {
-    console.log(input);
-    const search = new Search(input);
-
-    search.listOfKeywords();
   }
 }
 
