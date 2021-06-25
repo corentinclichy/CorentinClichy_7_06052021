@@ -55,13 +55,14 @@
             class="btn w-100 fs-5 p-0"
             aria-expanded="false"
             data-bs-toggle="dropdown"
+            name="ingredient"
           >
             <input
               placeholder="Ingrédients"
-              name="ingrédient"
+              name="ingredient"
               class="filter-input pe-5"
             />
-            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-chevron-down" name="ingredient"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu--ingredients">
             <div
@@ -73,6 +74,7 @@
                 flex-wrap
                 justify-content-between
               "
+              id="ingredient-list"
             >
               <li>
                 <a class="dropdown-item dropdown-item--ingredients" href="#"
@@ -97,14 +99,15 @@
             type="button"
             class="btn w-100 fs-5 p-0"
             aria-expanded="false"
+            name="appliance"
             data-bs-toggle="dropdown"
           >
             <input
               placeholder="Appareils"
-              name="appareil"
+              name="appliance"
               class="filter-input pe-5"
             />
-            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-chevron-down" name="appliance"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu--appareils">
             <div
@@ -116,6 +119,7 @@
                 flex-wrap
                 justify-content-between
               "
+              id="appareils-list"
             >
               <li>
                 <a class="dropdown-item dropdown-item--appareils" href="#"
@@ -141,13 +145,14 @@
             class="btn w-100 fs-5 p-0"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            name="ustensile"
           >
             <input
               placeholder="Ustensiles"
               name="ustensile"
               class="filter-input pe-5"
             />
-            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-chevron-down" name="ustensile"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu--ustensiles">
             <div
@@ -159,6 +164,7 @@
                 flex-wrap
                 justify-content-between
               "
+              id="ustensiles-list"
             >
               <li>
                 <a class="dropdown-item dropdown-item--ustensiles" href="#"
