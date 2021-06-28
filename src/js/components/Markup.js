@@ -3,7 +3,7 @@ class Markup {
 
   filterItem(filterItemName, name) {
     return `
-    <li>
+    <li class="dropdown-item__wrapper">
       <a class="dropdown-item dropdown-item--${filterItemName}" href="#">${name}</a>
     </li>
     `;

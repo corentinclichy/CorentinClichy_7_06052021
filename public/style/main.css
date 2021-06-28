@@ -10807,10 +10807,32 @@ textarea.form-control-lg {
 .btn-category .dropdown-menu--ustensiles {
   background-color: #ed6454 !important;
 }
-.btn-category .dropdown-menu .wrapper .dropdown-item {
-  color: rgba(255, 255, 255, 0.705);
+.btn-category .dropdown-menu .wrapper .dropdown-item__wrapper {
+  flex: 1 0 200px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
-.btn-category .dropdown-menu .wrapper .dropdown-item:hover {
+@media (min-width: 640px) {
+  .btn-category .dropdown-menu .wrapper .dropdown-item__wrapper {
+    max-width: calc(100%);
+  }
+}
+@media (min-width: 768px) {
+  .btn-category .dropdown-menu .wrapper .dropdown-item__wrapper {
+    max-width: 100%;
+  }
+}
+@media (min-width: 1024px) {
+  .btn-category .dropdown-menu .wrapper .dropdown-item__wrapper {
+    max-width: calc(200px);
+  }
+}
+.btn-category .dropdown-menu .wrapper .dropdown-item__wrapper .dropdown-item {
+  color: rgba(255, 255, 255, 0.705);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-category .dropdown-menu .wrapper .dropdown-item__wrapper .dropdown-item:hover {
   background-color: transparent;
   color: white;
 }
@@ -10856,7 +10878,7 @@ header {
 }
 
 .categories {
-  max-width: 80%;
+  max-width: 100%;
 }
 
 body {
