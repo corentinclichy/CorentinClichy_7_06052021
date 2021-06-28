@@ -16,6 +16,8 @@ class Search {
 
     return searchFilterItem;
   }
+
+  _get;
 }
 
 export default Search;
