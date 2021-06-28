@@ -20,6 +20,7 @@ class Helpers {
     for (var pattern in map) {
       str = str.replace(new RegExp(map[pattern], "g"), pattern);
       str = str.toLowerCase();
+      str = str.trim();
     }
 
     return str;

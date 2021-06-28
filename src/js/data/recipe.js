@@ -9,6 +9,7 @@ class Recipe {
     this.ustensils = [];
     this.appareils = [];
     this.helpers = new Helpers();
+    this.updatedRecipes = [];
   }
 
   listOfFilter(filterName, filterItemName, input) {
@@ -41,15 +42,15 @@ class Recipe {
     }
   }
 
-  listOfRecipes(input) {
-    let filteredRecipes = [];
-    if (input === "") {
-      filteredRecipes = [...this.recipes];
-    } else {
-      console.log(input);
-    }
+  filteredRecipes(input, badges) {
+    const search = new Search(input, this.recipes, badges);
+    const searchfilteredRecipes = search.recipesSearchWithFilter();
+  }
 
-    return filteredRecipes;
+  allrecipes() {
+    let allRecipes = [...this.recipes];
+
+    return allRecipes;
   }
 }
 

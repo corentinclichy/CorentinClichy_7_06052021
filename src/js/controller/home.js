@@ -105,13 +105,13 @@ class HomeController {
   }
 
   showRecipes(container, input) {
-    console.log(container, input, this.badges);
-
     if (input !== "" || this.badges.length !== 0) {
       console.log("there is something");
       container.innerHTML = "";
+
+      const list = this.recipeHandler.filteredRecipes(input, this.badges);
     } else {
-      const list = this.recipeHandler.listOfRecipes(input);
+      const list = this.recipeHandler.allrecipes();
       container.innerHTML = "";
 
       list.map((item) => {
