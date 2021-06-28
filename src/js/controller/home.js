@@ -3,9 +3,13 @@ import RecipeHandler from "../data/recipe.js";
 import Search from "../data/Search.js";
 
 class HomeController {
-  constructor() {
+  constructor(recipesContainer, badgesContainer, mainSearchInput) {
     this.markup = new Markup();
     this.recipeHandler = new RecipeHandler();
+    this.recipesContainer = recipesContainer;
+    this.badgesContainer = badgesContainer;
+    this.mainSearchInput = mainSearchInput;
+    this.badges = [];
   }
 
   showfilter(el) {
@@ -34,7 +38,6 @@ class HomeController {
   }
 
   _addBadge(el) {
-    let container = document.querySelector(".badges");
     let badgeName = el.target.innerText;
     let typeOfBadge;
     let badges;
@@ -49,14 +52,18 @@ class HomeController {
     if (el.target.classList.contains("dropdown-item--ustensile"))
       typeOfBadge = "ustensiles";
 
-    let index = container.children.length;
-    container.innerHTML += this.markup.badge(index, typeOfBadge, badgeName);
+    let index = this.badgesContainer.children.length;
+    this.badgesContainer.innerHTML += this.markup.badge(
+      index,
+      typeOfBadge,
+      badgeName
+    );
 
-    badges = document.querySelectorAll(".badge");
+    badges = this.badgesContainer.children;
 
-    badges.forEach((badge) => {
-      this._deleteBadge(badge, container);
-    });
+    for (let badge of badges) {
+      this._deleteBadge(badge, this.badgesContainer, this.badges);
+    }
   }
 
   _deleteBadge(badge, container) {
@@ -64,6 +71,12 @@ class HomeController {
     closeBtn.addEventListener("click", (e) => {
       let badgeToDelete = e.target.parentNode;
       container.removeChild(badgeToDelete);
+      this.badges = this._listOfSelectedBadges(this.badgesContainer);
+      this.showRecipes(
+        this.recipesContainer,
+        this.mainSearchInput.value,
+        this.badges
+      );
     });
   }
 
@@ -81,24 +94,42 @@ class HomeController {
     for (let item of container.children) {
       item.addEventListener("click", (e) => {
         this._addBadge(e);
+        this.badges = this._listOfSelectedBadges(this.badgesContainer);
+        this.showRecipes(
+          this.recipesContainer,
+          this.mainSearchInput.value,
+          this.badges
+        );
       });
     }
   }
 
   showRecipes(container, input) {
-    const list = this.recipeHandler.listOfRecipes(input);
-    container.innerHTML = "";
+    console.log(container, input, this.badges);
 
-    list.map((item) => {
-      const recipe = {
-        name: item.name,
-        description: item.description,
-        ingredients: item.ingredients,
-        time: item.time,
-        ustensils: item.ustensils,
-      };
-      container.innerHTML += this.markup.recipeCard(recipe);
-    });
+    if (input !== "" || this.badges.length !== 0) {
+      console.log("there is something");
+      container.innerHTML = "";
+    } else {
+      const list = this.recipeHandler.listOfRecipes(input);
+      container.innerHTML = "";
+
+      list.map((item) => {
+        const recipe = {
+          name: item.name,
+          description: item.description,
+          ingredients: item.ingredients,
+          time: item.time,
+          ustensils: item.ustensils,
+        };
+        container.innerHTML += this.markup.recipeCard(recipe);
+      });
+    }
+  }
+
+  _listOfSelectedBadges(badgesContainer) {
+    const badgesArr = Array.from(badgesContainer.children);
+    return badgesArr;
   }
 }
 

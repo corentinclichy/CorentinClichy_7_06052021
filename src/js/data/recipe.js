@@ -45,6 +45,8 @@ class Recipe {
     let filteredRecipes = [];
     if (input === "") {
       filteredRecipes = [...this.recipes];
+    } else {
+      console.log(input);
     }
 
     return filteredRecipes;

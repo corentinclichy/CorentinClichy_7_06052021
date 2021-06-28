@@ -24,7 +24,11 @@ const ustensilesFilterList = document.querySelector("#ustensiles-list");
 const recipesContainer = document.querySelector(".recipes");
 
 //initialization
-const homeController = new HomeController();
+const homeController = new HomeController(
+  recipesContainer,
+  badgesContainer,
+  mainSearchInput
+);
 homeController.showRecipes(recipesContainer, "");
 
 //Click on filter buttons
@@ -50,7 +54,7 @@ filterInputs.forEach((filterInput) => {
         );
 
         break;
-      case "appliance":
+      case "appareil":
         filterName = "appliance";
         filterItemName = "appliance";
         homeController.showFilterItems(
@@ -80,67 +84,12 @@ filterInputs.forEach((filterInput) => {
 });
 
 document.addEventListener("click", (e) => {
-  console.log(e.target);
-
   if (!e.target.matches(".filter-input")) {
     filterInputs.forEach((filterInput) => {
       homeController.resetFilter(filterInput);
     });
   }
 });
-// btnElements.forEach((btn) => {
-//   btn.addEventListener("click", (e) => {
-//     //reset input
-//     filterInputs.forEach((input) => {
-//       homeController.resetFilter(input);
-//     });
-//     //show dropdown filter
-//     homeController.showfilter(e.target);
-//     console.log(e.target);
-
-//     let filterName;
-//     let filterItemName;
-
-//     switch (e.target.name) {
-//       case "ingredient":
-//         filterName = "ingredients";
-//         filterItemName = "ingredient";
-//         homeController.showFilterItems(
-//           ingredientsFilterList,
-//           filterName,
-//           filterItemName
-//         );
-
-//         break;
-//       case "appliance":
-//         filterName = "appliance";
-//         filterItemName = "appliance";
-//         homeController.showFilterItems(
-//           appareilsFilterList,
-//           filterName,
-//           filterItemName
-//         );
-//         break;
-//       case "ustensile":
-//         filterName = "ustensils";
-//         filterItemName = "ustensile";
-//         homeController.showFilterItems(
-//           ustensilesFilterList,
-//           filterName,
-//           filterItemName
-//         );
-//         break;
-//       default:
-//         break;
-//     }
-//   });
-
-//   filterItems.forEach((filterItem) => {
-//     filterItem.addEventListener("click", (e) => {
-//       homeController.addBadge(e, badgesContainer);
-//     });
-//   });
-// });
 
 inputs.forEach((input) => {
   input.addEventListener("input", (e) => {
@@ -181,6 +130,10 @@ inputs.forEach((input) => {
           filterItemName,
           input
         );
+        break;
+
+      case "mainSearchInput":
+        homeController.showRecipes(recipesContainer, input);
         break;
 
       default:

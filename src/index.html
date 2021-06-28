@@ -38,6 +38,7 @@
           type="text"
           placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
           id="example-search-input"
+          name="mainSearchInput"
         />
         <button class="search__btn btn fs-3" type="button">
           <i class="fa fa-search"></i>
@@ -93,15 +94,15 @@
             type="button"
             class="btn w-100 fs-5 p-0"
             aria-expanded="false"
-            name="appliance"
+            name="appareil"
             data-bs-toggle="dropdown"
           >
             <input
               placeholder="Appareils"
-              name="appliance"
+              name="appareil"
               class="filter-input pe-5 filter-input--appliances"
             />
-            <i class="fas fa-chevron-down" name="appliance"></i>
+            <i class="fas fa-chevron-down" name="appareil"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu--appareils">
             <div

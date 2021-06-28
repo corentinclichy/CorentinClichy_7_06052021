@@ -17,7 +17,7 @@ class Search {
     return searchFilterItem;
   }
 
-  _get;
+  _getBadgesListKeywords(badgesList) {}
 }
 
 export default Search;
