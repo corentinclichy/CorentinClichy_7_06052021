@@ -1,6 +1,9 @@
+import stopWordsFr from "../data/stop_words_french.js";
+
 class Helpers {
   constructor(str) {
     this.string = str;
+    this.stopWords = stopWordsFr;
   }
 
   normalize(str) {
@@ -22,8 +25,11 @@ class Helpers {
       str = str.toLowerCase();
       str = str.trim();
     }
-
     return str;
+  }
+
+  KeywordsWhitoutStopWords(keywordsArray) {
+    return keywordsArray.filter((item) => !stopWordsFr.includes(item));
   }
 }
 export default Helpers;

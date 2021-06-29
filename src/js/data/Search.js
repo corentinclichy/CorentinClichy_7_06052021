@@ -32,25 +32,21 @@ class Search {
       inputKwNorm.push(this.helpers.normalize(inputkw));
     });
 
-    console.log(this.badges);
-
     this.badges.length > 0
       ? this.badges.forEach((badge) => {
           const filterNameString = this.helpers.normalize(badge.innerText);
           filterKeywordsNorm = filterNameString.split(" ");
-          console.log(filterKeywordsNorm);
 
           filterKeywordsNorm.map((keyword) => {
             filterKeywordsNormArray.push(keyword);
           });
 
-          console.log(filterKeywordsNormArray);
-
           keywordsArray = [...inputKwNorm, ...filterKeywordsNormArray];
         })
       : (keywordsArray = [...inputKwNorm]);
 
-    console.log(keywordsArray);
+    //take out stopwords from the array
+    keywordsArray = this.helpers.KeywordsWhitoutStopWords(keywordsArray);
 
     //filtre avec l'ensemble des keyword
     const updatedRecipes = this.filteredArray.filter((sortBy) => {

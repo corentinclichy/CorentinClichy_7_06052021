@@ -16,20 +16,35 @@ class Recipe {
     let filteredArray = new Set();
 
     /// Input empty or input is not empty
-
-    this.recipes.map((recipe) => {
-      if (Array.isArray(recipe[filterName])) {
-        recipe[filterName].map((filterItem) => {
-          if (filterItem[filterItemName] === undefined) {
-            filteredArray.add(filterItem);
-          } else {
-            filteredArray.add(filterItem[filterItemName]);
-          }
-        });
-      } else {
-        filteredArray.add(recipe[filterItemName]);
-      }
-    });
+    if (this.updatedRecipes.length === 0) {
+      this.recipes.map((recipe) => {
+        if (Array.isArray(recipe[filterName])) {
+          recipe[filterName].map((filterItem) => {
+            if (filterItem[filterItemName] === undefined) {
+              filteredArray.add(filterItem);
+            } else {
+              filteredArray.add(filterItem[filterItemName]);
+            }
+          });
+        } else {
+          filteredArray.add(recipe[filterItemName]);
+        }
+      });
+    } else {
+      this.updatedRecipes.map((recipe) => {
+        if (Array.isArray(recipe[filterName])) {
+          recipe[filterName].map((filterItem) => {
+            if (filterItem[filterItemName] === undefined) {
+              filteredArray.add(filterItem);
+            } else {
+              filteredArray.add(filterItem[filterItemName]);
+            }
+          });
+        } else {
+          filteredArray.add(recipe[filterItemName]);
+        }
+      });
+    }
 
     if (input === undefined) {
       return filteredArray;
@@ -44,7 +59,9 @@ class Recipe {
 
   filteredRecipes(input, badges) {
     const search = new Search(input, this.recipes, badges);
-    const searchfilteredRecipes = search.recipesSearchWithFilter();
+    this.updatedRecipes = search.recipesSearchWithFilter();
+
+    return this.updatedRecipes;
   }
 
   allrecipes() {
