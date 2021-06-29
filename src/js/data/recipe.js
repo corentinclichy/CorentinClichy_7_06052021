@@ -59,6 +59,7 @@ class Recipe {
 
   filteredRecipes(input, badges) {
     const search = new Search(input, this.recipes, badges);
+
     this.updatedRecipes = search.recipesSearchWithFilter();
 
     return this.updatedRecipes;

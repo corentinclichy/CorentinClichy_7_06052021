@@ -110,16 +110,16 @@ class HomeController {
 
       const list = this.recipeHandler.filteredRecipes(input, this.badges);
 
-      list.map((item) => {
-        const recipe = {
-          name: item.name,
-          description: item.description,
-          ingredients: item.ingredients,
-          time: item.time,
-          ustensils: item.ustensils,
-        };
-        container.innerHTML += this.markup.recipeCard(recipe);
-      });
+      // list.map((item) => {
+      //   const recipe = {
+      //     name: item.name,
+      //     description: item.description,
+      //     ingredients: item.ingredients,
+      //     time: item.time,
+      //     ustensils: item.ustensils,
+      //   };
+      //   container.innerHTML += this.markup.recipeCard(recipe);
+      // });
     } else {
       const list = this.recipeHandler.allrecipes();
       container.innerHTML = "";

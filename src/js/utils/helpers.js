@@ -31,5 +31,15 @@ class Helpers {
   KeywordsWhitoutStopWords(keywordsArray) {
     return keywordsArray.filter((item) => !stopWordsFr.includes(item));
   }
+
+  recipeParameterWithoutStopWords(string) {
+    const stringArray = string.split(" ");
+    const stringArrayWithoutStopWords = stringArray.filter(
+      (item) => !stopWordsFr.includes(item)
+    );
+
+    const stringArrayAsAString = stringArrayWithoutStopWords.join(" ");
+    return stringArrayAsAString;
+  }
 }
 export default Helpers;
