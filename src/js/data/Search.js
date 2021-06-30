@@ -65,12 +65,10 @@ class Search {
 
     let keywordsArray;
     // get input and filter keywords
-    const inputKw = this.input.split(" ");
-    let inputKwNorm = [];
 
-    inputKw.forEach((inputkw) => {
-      inputKw != "" && inputKwNorm.push(this.helpers.normalize(inputkw));
-    });
+    const InputNorm = this.helpers.normalize(this.input);
+    const inputKw = InputNorm.split(" ");
+    console.log(inputKw);
 
     this.badges.length > 0
       ? this.badges.forEach((badge) => {
@@ -81,9 +79,11 @@ class Search {
             filterKeywordsNormArray.push(keyword);
           });
 
-          keywordsArray = [...inputKwNorm, ...filterKeywordsNormArray];
+          inputKw === ""
+            ? (keywordsArray = [...filterKeywordsNormArray])
+            : (keywordsArray = [...inputKw, ...filterKeywordsNormArray]);
         })
-      : (keywordsArray = [...inputKwNorm]);
+      : (keywordsArray = [...inputKw]);
 
     //take out stopwords from the array
     keywordsArray = this.helpers.KeywordsWhitoutStopWords(keywordsArray);
@@ -92,9 +92,6 @@ class Search {
   }
 
   getFilteredRecipes() {
-    let keywordsRecipes = new Set();
-    let updatedRecipes = new Set();
-
     const keywordsInput = this._getKeywordsInputs();
     console.log(keywordsInput);
     let filteredRecipes = new Set(this.filteredArray);

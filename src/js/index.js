@@ -135,6 +135,7 @@ inputs.forEach((input) => {
 
       case "mainSearchInput":
         homeController.showRecipes(recipesContainer, input);
+
         break;
 
       default:
