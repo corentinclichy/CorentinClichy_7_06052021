@@ -10,6 +10,7 @@ class Recipe {
     this.appareils = [];
     this.helpers = new Helpers();
     this.updatedRecipes = [];
+    this.mapTable;
   }
 
   listOfFilter(filterName, filterItemName, input) {
@@ -60,14 +61,18 @@ class Recipe {
   filteredRecipes(input, badges) {
     const search = new Search(input, this.recipes, badges);
 
-    this.updatedRecipes = search.recipesSearchWithFilter();
+    this.updatedRecipes = search.getFilteredRecipes();
+    console.log(this.updatedRecipes);
 
     return this.updatedRecipes;
   }
 
   allrecipes() {
+    const search = new Search("", this.recipes, "");
     let allRecipes = [...this.recipes];
 
+    this.mapTable = search.createMapTable();
+    console.log(this.mapTable);
     return allRecipes;
   }
 }

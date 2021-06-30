@@ -1,4 +1,5 @@
 import HomeController from "./controller/home.js";
+import Search from "./data/Search.js";
 
 // Selectors
 

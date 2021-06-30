@@ -9,6 +9,7 @@ class Search {
     this.filteredArray = filteredArray;
     this.helpers = new Helpers();
     this.badges = badges;
+    this.mapTable = this.createMapTable();
   }
 
   filterSearch() {
@@ -19,49 +20,46 @@ class Search {
     return searchFilterItem;
   }
 
-  ListOfAllKeyWords() {
-    let allKeywords = new Set();
+  createMapTable() {
+    let mapRecipes = {};
+    let recipeKeywords = [];
 
     this.filteredArray.forEach((recipe) => {
       const recipeName = recipe.name;
       const recipeDescription = recipe.description;
 
-      const recipeNameSplit =
-        this._splitAndTakeOffStopWordsAndPushToGlobalArray(
-          recipeName,
-          allKeywords
-        );
+      const recipeNameSplit = this._splitAndTakeOffStopWords(recipeName);
 
       const recipeDescriptionSplit =
-        this._splitAndTakeOffStopWordsAndPushToGlobalArray(
-          recipeDescription,
-          allKeywords
-        );
+        this._splitAndTakeOffStopWords(recipeDescription);
+
+      const keywordsArray = [...recipeNameSplit, ...recipeDescriptionSplit];
+
+      keywordsArray.forEach((keyword) => {
+        for (let i = 1; i <= keyword.length; i++) {
+          const substring = keyword.slice(0, i);
+
+          if (substring in mapRecipes) {
+            mapRecipes[substring].add(recipe);
+          } else {
+            mapRecipes[substring] = new Set([recipe]);
+          }
+        }
+      });
     });
 
-    const keywordsArray = [...allKeywords];
-
-    const keywordsString = keywordsArray.join(" ");
-    console.log(keywordsString);
-
-    const subStringKeywords = this._buildSubString(keywordsString);
-
-    console.log(subStringKeywords);
+    return mapRecipes;
   }
 
-  _splitAndTakeOffStopWordsAndPushToGlobalArray(string, setList) {
+  _splitAndTakeOffStopWords(string) {
     const stringNormalized = this.helpers.normalize(string);
     const stringArray = stringNormalized.split(" ");
     const stringArrayWhitoutStopWords =
       this.helpers.KeywordsWhitoutStopWords(stringArray);
-
-    stringArrayWhitoutStopWords.map((item) => {
-      setList.add(item);
-    });
-    return setList;
+    return stringArrayWhitoutStopWords;
   }
 
-  recipesSearchWithFilter() {
+  _getKeywordsInputs() {
     let filterKeywordsNorm;
     let filterKeywordsNormArray = [];
 
@@ -71,7 +69,7 @@ class Search {
     let inputKwNorm = [];
 
     inputKw.forEach((inputkw) => {
-      inputKwNorm.push(this.helpers.normalize(inputkw));
+      inputKw != "" && inputKwNorm.push(this.helpers.normalize(inputkw));
     });
 
     this.badges.length > 0
@@ -90,62 +88,32 @@ class Search {
     //take out stopwords from the array
     keywordsArray = this.helpers.KeywordsWhitoutStopWords(keywordsArray);
 
-    console.log(keywordsArray);
+    return keywordsArray;
+  }
 
-    let updatedRecipes = [];
+  getFilteredRecipes() {
+    let keywordsRecipes = new Set();
+    let updatedRecipes = new Set();
 
-    keywordsArray.forEach((keyword) => {
-      if (keyword !== "") {
-        this.filteredArray.forEach((recipe) => {
-          const recipeName = this.helpers.normalize(recipe.name);
-          const recipeNameWhitoutStopWords =
-            this.helpers.recipeParameterWithoutStopWords(recipeName);
+    const keywordsInput = this._getKeywordsInputs();
+    console.log(keywordsInput);
+    let filteredRecipes = new Set(this.filteredArray);
 
-          const recipeDescription = this.helpers.normalize(recipe.description);
-          const recipeDescriptionWhithoutStopWords =
-            this.helpers.recipeParameterWithoutStopWords(recipeDescription);
+    keywordsInput.forEach((keyword) => {
+      let keywordsRecipes;
 
-          const recipeAppliance = this.helpers.normalize(recipe.appliance);
-          const recipeApplianceWhithoutStopWords =
-            this.helpers.recipeParameterWithoutStopWords(recipeAppliance);
-
-          if (
-            recipeNameWhitoutStopWords.includes(keyword) ||
-            recipeDescriptionWhithoutStopWords.includes(keyword) ||
-            recipeApplianceWhithoutStopWords.includes(keyword)
-          ) {
-            console.log("is in title");
-            return updatedRecipes.push(recipe);
-          }
-
-          recipe.ingredients.forEach((ingredient) => {
-            const ingredientName = this.helpers.normalize(
-              ingredient.ingredient
-            );
-            const ingredientNameWithoutStopWords =
-              this.helpers.recipeParameterWithoutStopWords(ingredientName);
-
-            if (ingredientNameWithoutStopWords.includes(keyword)) {
-              return updatedRecipes.push(recipe);
-            }
-          });
-
-          recipe.ustensils.forEach((ustensile) => {
-            const ustensileName = this.helpers.normalize(ustensile);
-            const ustensileNameWithoutStopWords =
-              this.helpers.recipeParameterWithoutStopWords(ustensileName);
-
-            if (ustensileNameWithoutStopWords.includes(keyword)) {
-              return updatedRecipes.push(recipe);
-            }
-          });
-        });
+      if (keyword in this.mapTable) {
+        keywordsRecipes = this.mapTable[keyword];
+      } else {
+        keywordsRecipes = new Set();
       }
+
+      filteredRecipes = new Set(
+        [...keywordsRecipes].filter((recipe) => filteredRecipes.has(recipe))
+      );
     });
 
-    console.log(updatedRecipes);
-
-    return updatedRecipes;
+    return [...filteredRecipes];
   }
 }
 
