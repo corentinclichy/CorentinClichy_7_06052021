@@ -105,7 +105,7 @@ class HomeController {
   }
 
   showRecipes(container, input) {
-    if (input !== "" || this.badges.length !== 0) {
+    if ((input !== "" && input.length >= 3) || this.badges.length !== 0) {
       container.innerHTML = "";
 
       const list = this.recipeHandler.filteredRecipes(input, this.badges);
