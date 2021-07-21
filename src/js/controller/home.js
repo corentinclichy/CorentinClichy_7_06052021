@@ -14,7 +14,6 @@ class HomeController {
 
   showfilter(el) {
     //Add showFilter class allowing element to flex:1
-
     setTimeout(() => {
       el.focus();
       el.placeholder = `Recherche un ${el.name}`;
@@ -28,7 +27,6 @@ class HomeController {
 
   resetFilter(el) {
     //select the .btn-category
-
     el.parentNode.parentNode.classList.remove("showFilter");
 
     //Change the placeholder
@@ -67,11 +65,10 @@ class HomeController {
   }
 
   _deleteBadge(badge, container) {
-    let closeBtn = badge.children[1];
-    closeBtn.addEventListener("click", (e) => {
-      let badgeToDelete = e.target.parentNode;
-      container.removeChild(badgeToDelete);
+    badge.children[1].addEventListener("click", (e) => {
+      container.removeChild(e.target.parentNode);
       this.badges = this._listOfSelectedBadges(this.badgesContainer);
+      // Show associated recipes
       this.showRecipes(
         this.recipesContainer,
         this.mainSearchInput.value,
@@ -105,42 +102,46 @@ class HomeController {
   }
 
   showRecipes(container, input) {
+    // If input is not empty and input.length > 3 OU if there is selected badges
     if ((input !== "" && input.length >= 3) || this.badges.length !== 0) {
       container.innerHTML = "";
-
-      const list = this.recipeHandler.filteredRecipes(input, this.badges);
-      console.log(list);
-
-      list.map((item) => {
-        const recipe = {
-          name: item.name,
-          description: item.description,
-          ingredients: item.ingredients,
-          time: item.time,
-          ustensils: item.ustensils,
-        };
-        container.innerHTML += this.markup.recipeCard(recipe);
+      // Use the filtered method to get the associated recipes
+      this.recipeHandler.filteredRecipes(input, this.badges).map((recipe) => {
+        container.innerHTML += this.markup.recipeCard({
+          name: recipe.name,
+          description: recipe.description,
+          ingredients: recipe.ingredients,
+          time: recipe.time,
+          ustensils: recipe.ustensils,
+        });
       });
     } else {
-      const list = this.recipeHandler.allrecipes();
+      // If there is no filter or selected badge, show all the recipes
       container.innerHTML = "";
-
-      list.map((item) => {
-        const recipe = {
-          name: item.name,
-          description: item.description,
-          ingredients: item.ingredients,
-          time: item.time,
-          ustensils: item.ustensils,
-        };
-        container.innerHTML += this.markup.recipeCard(recipe);
+      this.recipeHandler.allrecipes().map((recipe) => {
+        container.innerHTML += this.markup.recipeCard({
+          name: recipe.name,
+          description: recipe.description,
+          ingredients: recipe.ingredients,
+          time: recipe.time,
+          ustensils: recipe.ustensils,
+        });
       });
     }
   }
 
+  /**
+   * @param {HTMLElement} container
+   *
+   * @description
+   * Just take the HTML Badges Container and return an array from the HTML Collection
+   *
+   * @returns {Array} Array of HTML element (badges)
+   */
+  // TODO: Maybe this is useless function use spread instead on the deleteBadge method????
   _listOfSelectedBadges(badgesContainer) {
-    const badgesArr = Array.from(badgesContainer.children);
-    return badgesArr;
+    // Get the list of selected badges
+    return Array.from(badgesContainer.children);
   }
 }
 

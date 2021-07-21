@@ -10,12 +10,12 @@ class Recipe {
     this.appareils = [];
     this.helpers = new Helpers();
     this.updatedRecipes = [];
-    this.mapTable;
+    this.mapTable = new Search("", this.recipes, "").createMapTable();
   }
 
+  //TODO: COMMENT THIS CODE
   listOfFilter(filterName, filterItemName, input) {
     let filteredArray = new Set();
-
     /// Input empty or input is not empty
     if (this.updatedRecipes.length === 0) {
       this.recipes.map((recipe) => {
@@ -67,13 +67,14 @@ class Recipe {
     return this.updatedRecipes;
   }
 
+  /**
+   * @returns {Array} Array of recipes
+   *
+   * @description
+   * Gives back an array of all recipes and generate the hashTable
+   */
   allrecipes() {
-    const search = new Search("", this.recipes, "");
-    let allRecipes = [...this.recipes];
-
-    this.mapTable = search.createMapTable();
-    console.log(this.mapTable);
-    return allRecipes;
+    return [...this.recipes];
   }
 }
 
