@@ -9,7 +9,6 @@ class Search {
     this.filteredArray = filteredArray;
     this.helpers = new Helpers();
     this.badges = badges;
-    // this.mapTable = this.createMapTable();
   }
 
   // KEYWORDS RELATED METHODS
@@ -125,7 +124,6 @@ class Search {
     const keywordsInput = this._getKeywordsInputs();
 
     // const mapTable = this.createMapTable();
-
     let keywordsRecipesIndex = [];
 
     // For each keyword, if it is in the map table, get the recipes index
@@ -142,7 +140,6 @@ class Search {
         // if keywordRecipesIndex is empty
         // if it is, return the intersection
         // if it is not, return the union
-
         if (
           keywordsRecipesIndex.length === undefined ||
           keywordsRecipesIndex.length === 0
