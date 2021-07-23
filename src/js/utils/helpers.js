@@ -9,7 +9,6 @@ class Helpers {
    * @description
    * Method to normalize the string
    * @return {string}
-
    **/
   normalize(str) {
     const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
@@ -17,7 +16,7 @@ class Helpers {
     str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     // Remove ponctuation
     str = str.replace(regex, " ").toLowerCase().trim();
-
+    // Return the string
     return str;
   }
 

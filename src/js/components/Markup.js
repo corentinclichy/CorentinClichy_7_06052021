@@ -1,6 +1,9 @@
+/**
+ * @module Markup
+ * @description
+ * Class for all the markup components
+ **/
 class Markup {
-  constructor() {}
-
   filterItem(filterItemName, name) {
     return `
     <li class="dropdown-item__wrapper">
@@ -34,9 +37,11 @@ class Markup {
             )
             .join("")}
           </ul>
-          <p class="card-recipeSteps p-0 m-0 flex-grow-1 w-50">
+          <div class='module line-clamp'>
+            <p class="card-recipeSteps p-0 m-0 flex-grow-1">
             ${description}
-          </p>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -49,6 +54,21 @@ class Markup {
           <span class="pe-5">${badgeName}</span>
           <i class="far fa-times-circle"></i>
     </button>
+    `;
+  }
+
+  noResults() {
+    return `
+    <div className="error-screen d-flex flex-column justify-content-center">
+    <p>Il n'y a pas de résutlat</p>
+    <p>You could have tried:</p>
+    <ul class='list-unstyled'>
+    <li class="text-success">Salade</li>
+    <li class="text-success">Gratin</li>
+    <li class="text-success">Smoothie</li>
+    </ul>
+    </div>
+
     `;
   }
 }

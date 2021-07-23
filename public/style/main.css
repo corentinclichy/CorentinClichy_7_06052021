@@ -10873,6 +10873,11 @@ textarea.form-control-lg {
   box-shadow: none;
 }
 
+.error-screen {
+  width: 100% !important;
+  color: red;
+}
+
 header {
   color: #d04f4f;
 }
@@ -10944,9 +10949,19 @@ body {
   list-style: none;
   font-size: 12px;
 }
-.recipes .card .card-body .card-text .card-recipeSteps {
+.recipes .card .card-body .card-text .module {
+  width: 100%;
+  width: 250px;
+  margin: 0 0 1em 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+.recipes .card .card-body .card-text .module .card-recipeSteps {
   font-size: 12px;
-  line-height: 12px;
+  line-height: 16px;
 }
 
 /*# sourceMappingURL=main.css.map */

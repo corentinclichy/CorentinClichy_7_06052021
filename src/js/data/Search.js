@@ -9,12 +9,12 @@ class Search {
     this.filteredArray = filteredArray;
     this.helpers = new Helpers();
     this.badges = badges;
-    this.mapTable = this.createMapTable();
+    // this.mapTable = this.createMapTable();
   }
 
   // KEYWORDS RELATED METHODS
 
-  // get an array of input including badges and input words
+  // get an array of filter item when searching on the filter input
   filterSearch() {
     return this.filteredArray.filter((word) =>
       this.helpers.normalize(word).includes(this.helpers.normalize(this.input))
@@ -81,7 +81,6 @@ class Search {
    * This method returns an array of all the user keywords (input or/and badges)
    * */
   _getKeywordsInputs() {
-    let filterKeywordsNorm;
     let filterKeywordsNormArray = [];
     let keywordsArray;
 
@@ -115,28 +114,57 @@ class Search {
   }
 
   /**
+   * @param {Array} MapTable with all substring and associated recipes index
    * @returns {Array}
    * @description
    * This method returns an array of all the user badges
    * */
-  getFilteredRecipes() {
+  getFilteredRecipes(mapTable) {
+    console.log(mapTable);
     // Get keywords from the input and badges
     const keywordsInput = this._getKeywordsInputs();
-    let keywordsRecipesIndex;
+
+    // const mapTable = this.createMapTable();
+
+    let keywordsRecipesIndex = [];
 
     // For each keyword, if it is in the map table, get the recipes index
     keywordsInput.forEach((keyword) => {
       // If the keyword is in the map table
       // if it is, get the recipes index
       // if it is not, return an empty array
-      if (keyword in this.mapTable) {
-        // get the recipes index (set
-        keywordsRecipesIndex = this.mapTable[keyword];
+      let indexIntersection = [];
+      if (keyword in mapTable) {
+        // get the recipes index (set)
+        // get the intersection keywordsRecipesIndex at each interation
+        indexIntersection = [...mapTable[keyword]];
+
+        // if keywordRecipesIndex is empty
+        // if it is, return the intersection
+        // if it is not, return the union
+
+        if (
+          keywordsRecipesIndex.length === undefined ||
+          keywordsRecipesIndex.length === 0
+        ) {
+          keywordsRecipesIndex = [...indexIntersection];
+        } else {
+          keywordsRecipesIndex = [...keywordsRecipesIndex].filter((x) =>
+            [...indexIntersection].includes(x)
+          );
+        }
       } else {
         keywordsRecipesIndex = new Set();
       }
     });
 
+    // console.log([...keywordsRecipesIndex]);
+
+    // console.log(
+    //   this.filteredArray.filter((recipe, index) =>
+    //     [...keywordsRecipesIndex].includes(index)
+    //   )
+    // );
     // Filter the recipes array with the recipes index
     // return the array of recipes who are inside keywordsRecipesIndex
     return this.filteredArray.filter((recipe, index) =>
