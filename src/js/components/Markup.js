@@ -59,14 +59,14 @@ class Markup {
 
   noResults() {
     return `
-    <div className="error-screen d-flex flex-column justify-content-center">
-    <p>Il n'y a pas de résutlat</p>
-    <p>You could have tried:</p>
-    <ul class='list-unstyled'>
-    <li class="text-success">Salade</li>
-    <li class="text-success">Gratin</li>
-    <li class="text-success">Smoothie</li>
-    </ul>
+    <div class="no-recipes-container d-flex flex-column align-items-center justify-content-center mt-5">
+      <p>Il n'y a pas de résutlat</p>
+      <p>Vous pouvez par exemple rechercher:</p>
+      <ul class='list-unstyled text-center'>
+        <li class="search_suggestion">Salade</li>
+        <li class="search_suggestion">Gratin</li>
+        <li class="search_suggestion">Smoothie</li>
+      </ul>
     </div>
 
     `;

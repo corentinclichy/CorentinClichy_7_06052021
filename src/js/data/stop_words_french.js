@@ -236,7 +236,6 @@ const stopWordsFr = [
   "m",
   "ma",
   "maint",
-  "mais",
   "malgré",
   "me",
   "même",

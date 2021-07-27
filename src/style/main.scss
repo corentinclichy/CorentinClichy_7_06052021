@@ -6,12 +6,12 @@
 @import "abstract/animations";
 @import "abstract/mixins";
 
+@import "pages/home";
+
 @import "components/searchForm";
 @import "components/btn-filter";
 @import "components/badge";
 @import "components/no-results";
-
-@import "pages/home";
 
 @import "base/typography";
 @import "base/base";

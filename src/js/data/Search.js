@@ -33,10 +33,28 @@ class Search {
     let mapRecipes = {};
 
     this.filteredArray.forEach((recipe) => {
+      let ingredientKeywordsSet = new Set();
+      let appliancesKeywordsSet = new Set();
+      let ustensilsKeywordsSet = new Set();
+
+      // get keyword of recipe.ingredients
+      recipe.ingredients.forEach((ingredient) => {
+        ingredientKeywordsSet.add(ingredient.ingredient);
+      });
+      // get the keywords of the recipe.appliances
+      appliancesKeywordsSet.add(recipe.appliance);
+
+      // get the keywords of the recipe.appliances
+      recipe.ustensils.forEach((ustensil) => {
+        ustensilsKeywordsSet.add(ustensil);
+      });
       // get all keywords of the recipes array
       const keywordsArray = [
         ...this._splitAndTakeOffStopWords(recipe.name),
         ...this._splitAndTakeOffStopWords(recipe.description),
+        ...this._splitAndTakeOffStopWords([...ingredientKeywordsSet].join(" ")),
+        ...this._splitAndTakeOffStopWords([...appliancesKeywordsSet].join(" ")),
+        ...this._splitAndTakeOffStopWords([...ustensilsKeywordsSet].join(" ")),
       ];
 
       // for each keyword

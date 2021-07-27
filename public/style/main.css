@@ -10732,6 +10732,14 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+header {
+  color: #d04f4f;
+}
+
+.categories {
+  max-width: 100%;
+}
+
 .search__input {
   border: none;
   height: 100%;
@@ -10873,17 +10881,15 @@ textarea.form-control-lg {
   box-shadow: none;
 }
 
-.error-screen {
-  width: 100% !important;
-  color: red;
+.no-recipes-container {
+  width: 100%;
 }
-
-header {
-  color: #d04f4f;
+.no-recipes-container .search_suggestion {
+  cursor: pointer !important;
+  color: gray;
 }
-
-.categories {
-  max-width: 100%;
+.no-recipes-container .search_suggestion:hover {
+  color: #242527;
 }
 
 body {

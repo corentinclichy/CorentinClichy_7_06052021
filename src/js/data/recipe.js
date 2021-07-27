@@ -5,9 +5,6 @@ import Search from "./search.js";
 class Recipe {
   constructor(ingredients, appareils, ustensils) {
     this.recipes = recipes;
-    this.ingredients = [];
-    this.ustensils = [];
-    this.appareils = [];
     this.helpers = new Helpers();
     this.updatedRecipes = [];
     this.mapTable = new Search("", this.recipes, "").createMapTable();
@@ -16,9 +13,11 @@ class Recipe {
   //TODO: COMMENT THIS CODE
   listOfFilter(filterName, filterItemName, input) {
     let filterItemList = new Set();
+    console.log(this.updatedRecipes);
     /// Input empty or input is not empty
     if (this.updatedRecipes.length === 0) {
       this.recipes.map((recipe) => {
+        // check if the parameter is an array (ex: recipe.ingredients === ARRAY)
         if (Array.isArray(recipe[filterName])) {
           recipe[filterName].map((filterItem) => {
             if (filterItem[filterItemName] === undefined) {
@@ -69,6 +68,7 @@ class Recipe {
    * Gives back an array of all recipes and generate the hashTable
    */
   allrecipes() {
+    this.updatedRecipes = [];
     return [...this.recipes];
   }
 }

@@ -16,6 +16,7 @@ class HomeController {
     this.badgesContainer = badgesContainer;
     this.mainSearchInput = mainSearchInput;
     this.badges = [];
+    this.input = document.querySelector(".search__input");
   }
 
   /**
@@ -132,6 +133,31 @@ class HomeController {
   }
 
   /**
+   * @param {HTMLElement} Container to display error message
+   * @description show error messsage if the user type a wrong search (no recipes found)
+   * @return null
+   **/
+  showErrorMessage(container, input) {
+    // Display error message if no recipes found
+    container.innerHTML = this.markup.noResults();
+
+    // Select all li element of container
+    let listOfSuggestions = container.querySelectorAll("li");
+    listOfSuggestions.forEach((item) => {
+      // Add a listener to the li element
+      item.addEventListener("click", (e) => {
+        // Change the value of the input to the value of the li element
+        this.input.value = e.target.innerText;
+        input = this.input.value;
+        // Reset the container
+        container.innerHTML = "";
+        // Show the recipes associated to the new value
+        this.showRecipes(container, input);
+      });
+    });
+  }
+
+  /**
    * @param {HTMLElement} Container of recipes
    * @param {input} input if the use search on the main input
    * @description Display recipes
@@ -155,7 +181,7 @@ class HomeController {
                 ustensils: ustensils,
               });
             })
-        : (container.innerHTML = this.markup.noResults());
+        : this.showErrorMessage(container, input);
     } else {
       // If there is no filter or selected badge, show all the recipes
       container.innerHTML = "";
