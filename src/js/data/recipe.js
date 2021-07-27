@@ -13,7 +13,6 @@ class Recipe {
   //TODO: COMMENT THIS CODE
   listOfFilter(filterName, filterItemName, input) {
     let filterItemList = new Set();
-    console.log(this.updatedRecipes);
     /// Input empty or input is not empty
     if (this.updatedRecipes.length === 0) {
       this.recipes.map((recipe) => {

@@ -146,6 +146,10 @@ class HomeController {
     listOfSuggestions.forEach((item) => {
       // Add a listener to the li element
       item.addEventListener("click", (e) => {
+        // Delete the badges inside the badge container
+        this.badgesContainer.innerHTML = "";
+        // Reset the array of badges
+        this.badges = [...this.badgesContainer.children];
         // Change the value of the input to the value of the li element
         this.input.value = e.target.innerText;
         input = this.input.value;

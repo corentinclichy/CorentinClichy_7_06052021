@@ -120,7 +120,7 @@ class Search {
           // If the input is empty
           // If it is keyword array equal only to the badge array
           // if it is not, keywordArray equal to the combination of the badge array and the input array
-          inputKw === ""
+          inputKw[0] === ""
             ? (keywordsArray = [...filterKeywordsNormArray])
             : (keywordsArray = [...inputKw, ...filterKeywordsNormArray]);
         })
@@ -136,13 +136,20 @@ class Search {
    * @description
    * This method returns an array of all the user badges
    * */
-  getFilteredRecipes(mapTable) {
-    console.log(mapTable);
+  getFilteredRecipes(mapTable, recipesListTest, keywordsInputTest) {
     // Get keywords from the input and badges
-    const keywordsInput = this._getKeywordsInputs();
+    let keywordsInput;
+    Array.isArray(keywordsInputTest)
+      ? (keywordsInput = keywordsInputTest)
+      : (keywordsInput = this._getKeywordsInputs());
+
+    let recipesList;
+    Array.isArray(recipesListTest)
+      ? (recipesList = recipesListTest)
+      : (recipesList = this.filteredArray);
 
     // const mapTable = this.createMapTable();
-    let keywordsRecipesIndex = [];
+    let keywordsRecipesIndex;
 
     // For each keyword, if it is in the map table, get the recipes index
     keywordsInput.forEach((keyword) => {
@@ -158,10 +165,7 @@ class Search {
         // if keywordRecipesIndex is empty
         // if it is, return the intersection
         // if it is not, return the union
-        if (
-          keywordsRecipesIndex.length === undefined ||
-          keywordsRecipesIndex.length === 0
-        ) {
+        if (keywordsRecipesIndex === undefined) {
           keywordsRecipesIndex = [...indexIntersection];
         } else {
           keywordsRecipesIndex = [...keywordsRecipesIndex].filter((x) =>
@@ -169,22 +173,45 @@ class Search {
           );
         }
       } else {
-        keywordsRecipesIndex = new Set();
+        indexIntersection = [...new Set()];
+        if (keywordsRecipesIndex === undefined) {
+          keywordsRecipesIndex = [...indexIntersection];
+        } else {
+          keywordsRecipesIndex = [...keywordsRecipesIndex].filter((x) =>
+            [...indexIntersection].includes(x)
+          );
+        }
       }
     });
 
-    // console.log([...keywordsRecipesIndex]);
-
-    // console.log(
-    //   this.filteredArray.filter((recipe, index) =>
-    //     [...keywordsRecipesIndex].includes(index)
-    //   )
-    // );
-    // Filter the recipes array with the recipes index
-    // return the array of recipes who are inside keywordsRecipesIndex
-    return this.filteredArray.filter((recipe, index) =>
+    return recipesList.filter((recipe, index) =>
       [...keywordsRecipesIndex].includes(index)
     );
+  }
+
+  testPerformanceFilteredRecipes(mapTable, recipesList, keywordsInput) {
+    this.filteredArray = recipes;
+    recipesList = this.filteredArray;
+    mapTable = this.createMapTable();
+    console.log(mapTable);
+
+    console.log(recipesList);
+
+    const testCases = [
+      ["coulis", "tomate"],
+      ["dfgjgds", "tomate"],
+      ["creme", "coco", "limonade"],
+    ];
+
+    console.time("testPerformanceFilteredRecipes");
+    testCases.map((testCase) => {
+      const filteredRecipes = this.getFilteredRecipes(
+        mapTable,
+        recipesList,
+        testCase
+      );
+    });
+    console.timeEnd("testPerformanceFilteredRecipes");
   }
 }
 

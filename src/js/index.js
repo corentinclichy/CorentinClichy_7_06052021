@@ -1,4 +1,5 @@
 import HomeController from "./controller/home.js";
+import Search from "./data/Search.js";
 
 // Selectors
 const filterInputs = document.querySelectorAll(".filter-input");
@@ -114,3 +115,7 @@ inputs.forEach((input) => {
     }
   });
 });
+
+/// TEST PERFORMANCE
+const search = new Search();
+search.testPerformanceFilteredRecipes();
