@@ -90,10 +90,9 @@ class Search {
       ["dfgjgds", "tomate"],
     ];
 
-    const numberOfSearch = 1000;
+    const numberOfSearch = 10000;
 
     console.time("testPerformanceFilteredRecipes");
-    let start = performance.now();
     for (let i = 0; i < numberOfSearch; i++) {
       testCases.map((testCase) => {
         const filteredRecipes = this.recipesSearchWithFilter(
@@ -102,11 +101,8 @@ class Search {
         );
       });
     }
-    let end = performance.now();
-
-    console.log(`${numberOfSearch * testCases.length} recherches effectuées`);
     console.timeEnd("testPerformanceFilteredRecipes");
-    console.log(`Temps d'exécution ${end - start}ms`);
+    console.log(`(${numberOfSearch * testCases.length} recherches effectuées)`);
   }
 }
 
