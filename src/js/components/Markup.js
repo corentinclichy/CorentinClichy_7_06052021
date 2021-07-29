@@ -51,6 +51,20 @@ class Markup {
     </button>
     `;
   }
+  noResults() {
+    return `
+    <div class="no-recipes-container d-flex flex-column align-items-center justify-content-center mt-5">
+      <p>Il n'y a pas de résutlat</p>
+      <p>Vous pouvez par exemple rechercher:</p>
+      <ul class='list-unstyled text-center'>
+        <li class="search_suggestion">Salade</li>
+        <li class="search_suggestion">Gratin</li>
+        <li class="search_suggestion">Smoothie</li>
+      </ul>
+    </div>
+
+    `;
+  }
 }
 
 export default Markup;
