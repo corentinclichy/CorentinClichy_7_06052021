@@ -23,7 +23,7 @@ class Search {
    * @description Get all the keyword (input and badges) and filter the list of recipes
    * @returns {Array}
    **/
-  recipesSearchWithFilter() {
+  recipesSearchWithFilter(keywordInputTest, recipesListTest) {
     // get input and filter keywords
     let filterKeywordsNormArray = [];
     let inputKwNorm = [];
@@ -74,6 +74,28 @@ class Search {
       }
       return true;
     });
+  }
+
+  testPerformanceFilteredRecipes(recipesList, keywordsInput) {
+    this.filteredArray = recipes;
+    recipesList = this.filteredArray;
+
+    console.log(recipesList);
+
+    const testCases = [
+      ["coulis", "tomate"],
+      ["dfgjgds", "tomate"],
+      ["creme", "coco", "limonade"],
+    ];
+
+    console.time("testPerformanceFilteredRecipes");
+    testCases.map((testCase) => {
+      const filteredRecipes = this.recipesSearchWithFilter(
+        testCase,
+        recipesList
+      );
+    });
+    console.timeEnd("testPerformanceFilteredRecipes");
   }
 }
 
