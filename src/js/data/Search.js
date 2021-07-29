@@ -92,12 +92,16 @@ class Search {
     ];
 
     console.time("testPerformanceFilteredRecipes");
-    testCases.map((testCase) => {
-      const filteredRecipes = this.recipesSearchWithFilter(
-        testCase,
-        recipesList
-      );
-    });
+    for (let i = 0; i < 1000; i++) {
+      testCases.map((testCase) => {
+        const filteredRecipes = this.recipesSearchWithFilter(
+          testCase,
+          recipesList
+        );
+      });
+    }
+
+    console.log(`${1000 * testCases.length} recherches effectuées`);
     console.timeEnd("testPerformanceFilteredRecipes");
   }
 }
