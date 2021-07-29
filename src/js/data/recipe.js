@@ -64,30 +64,6 @@ class Recipe {
     return this.updatedRecipes;
   }
 
-  showErrorMessage(container, badgeContainer, input) {
-    // Select all li element of container
-    let listOfSuggestions = container.querySelectorAll("li");
-    console.log(listOfSuggestions);
-
-    listOfSuggestions.forEach((item) => {
-      // Add a listener to the li element
-      item.addEventListener("click", (e) => {
-        console.log("click");
-        // Delete the badges inside the badge container
-        badgeContainer.innerHTML = "";
-        // Reset the array of badges
-        let badges = [...badgeContainer.children];
-        // Change the value of the input to the value of the li element
-        input.value = e.target.innerText;
-        input = input.value;
-        // Reset the container
-        container.innerHTML = "";
-        // Show the recipes associated to the new value
-        this.filteredRecipes(input, badges);
-      });
-    });
-  }
-
   allrecipes() {
     let allRecipes = [...this.recipes];
 

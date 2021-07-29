@@ -123,7 +123,7 @@ class HomeController {
         });
       } else {
         container.innerHTML = this.markup.noResults();
-        this.recipeHandler.showErrorMessage(
+        this.showErrorMessage(
           this.recipesContainer,
           this.badgesContainer,
           this.mainSearchInput
@@ -144,6 +144,30 @@ class HomeController {
         container.innerHTML += this.markup.recipeCard(recipe);
       });
     }
+  }
+
+  showErrorMessage(container, badgeContainer, input) {
+    // Select all li element of container
+    let listOfSuggestions = container.querySelectorAll("li");
+    console.log(listOfSuggestions);
+
+    listOfSuggestions.forEach((item) => {
+      // Add a listener to the li element
+      item.addEventListener("click", (e) => {
+        console.log("click");
+        // Delete the badges inside the badge container
+        badgeContainer.innerHTML = "";
+        // Reset the array of badges
+        this.badges = [...badgeContainer.children];
+        // Change the value of the input to the value of the li element
+        input.value = e.target.innerText;
+        input = input.value;
+        // Reset the container
+        container.innerHTML = "";
+        // Show the recipes associated to the new value
+        this.showRecipes(container, input);
+      });
+    });
   }
 
   _listOfSelectedBadges(badgesContainer) {
