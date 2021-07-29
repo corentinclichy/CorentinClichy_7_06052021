@@ -201,13 +201,18 @@ class Search {
     ];
 
     console.time("testPerformanceFilteredRecipes");
-    testCases.map((testCase) => {
-      const filteredRecipes = this.getFilteredRecipes(
-        mapTable,
-        recipesList,
-        testCase
-      );
-    });
+    for (let i = 0; i < 1000; i++) {
+      testCases.map((testCase) => {
+        const filteredRecipes = this.getFilteredRecipes(
+          mapTable,
+          recipesList,
+          testCase
+        );
+      });
+    }
+
+    console.log(`${1000 * testCases.length} recherches effectuées`);
+
     console.timeEnd("testPerformanceFilteredRecipes");
   }
 }
