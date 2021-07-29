@@ -2,8 +2,6 @@ import { recipes } from "../../ressources/data.js";
 import Helpers from "../utils/helpers.js";
 
 class Search {
-  //this.input @string
-  //this.tags @Array
   constructor(input, filteredArray, badges) {
     this.input = input;
     this.filteredArray = filteredArray;
@@ -11,35 +9,39 @@ class Search {
     this.badges = badges;
   }
 
+  /**
+   * @description Filter the list of filter based on the search input of each filter
+   * @returns {Array}
+   **/
   filterSearch() {
-    const searchFilterItem = this.filteredArray.filter((word) =>
+    return this.filteredArray.filter((word) =>
       this.helpers.normalize(word).includes(this.helpers.normalize(this.input))
     );
-
-    return searchFilterItem;
   }
 
+  /**
+   * @description Get all the keyword (input and badges) and filter the list of recipes
+   * @returns {Array}
+   **/
   recipesSearchWithFilter() {
-    let filterKeywordsNorm;
-    let filterKeywordsNormArray = [];
-
-    let keywordsArray;
     // get input and filter keywords
-    const inputKw = this.input.split(" ");
+    let filterKeywordsNormArray = [];
     let inputKwNorm = [];
+    let keywordsArray;
 
-    inputKw.forEach((inputkw) => {
+    //split and normalisze input keywords
+    this.input.split(" ").forEach((inputkw) => {
       inputKwNorm.push(this.helpers.normalize(inputkw));
     });
 
     this.badges.length > 0
       ? this.badges.forEach((badge) => {
-          const filterNameString = this.helpers.normalize(badge.innerText);
-          filterKeywordsNorm = filterNameString.split(" ");
-
-          filterKeywordsNorm.map((keyword) => {
-            filterKeywordsNormArray.push(keyword);
-          });
+          this.helpers
+            .normalize(badge.innerText)
+            .split(" ")
+            .map((keyword) => {
+              filterKeywordsNormArray.push(keyword);
+            });
 
           keywordsArray = [...inputKwNorm, ...filterKeywordsNormArray];
         })
@@ -49,21 +51,19 @@ class Search {
     keywordsArray = this.helpers.KeywordsWhitoutStopWords(keywordsArray);
 
     //filtre avec l'ensemble des keyword
-    const updatedRecipes = this.filteredArray.filter((sortBy) => {
+    // true or false
+    return this.filteredArray.filter((recipe) => {
+      // Filter return true if the recipe has all the keywords
       const matchKeywords = keywordsArray.every((keyword) => {
-        const normalizedName = this.helpers.normalize(sortBy.name);
-        const normalizedDescription = this.helpers.normalize(
-          sortBy.description
-        );
-        const normalizedAppliance = this.helpers.normalize(sortBy.appliance);
+        //check if every keyword match on of the condition
         return (
-          normalizedName.includes(keyword) ||
-          normalizedAppliance.includes(keyword) ||
-          normalizedDescription.includes(keyword) ||
-          sortBy.ustensils.some((x) =>
+          this.helpers.normalize(recipe.name).includes(keyword) ||
+          this.helpers.normalize(recipe.appliance).includes(keyword) ||
+          this.helpers.normalize(recipe.description).includes(keyword) ||
+          recipe.ustensils.some((x) =>
             this.helpers.normalize(x).includes(keyword)
           ) ||
-          sortBy.ingredients.some((y) =>
+          recipe.ingredients.some((y) =>
             this.helpers.normalize(y.ingredient).includes(keyword)
           )
         );
@@ -74,8 +74,6 @@ class Search {
       }
       return true;
     });
-
-    return updatedRecipes;
   }
 }
 
