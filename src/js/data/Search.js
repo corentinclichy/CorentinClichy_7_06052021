@@ -193,9 +193,6 @@ class Search {
     this.filteredArray = recipes;
     recipesList = this.filteredArray;
     mapTable = this.createMapTable();
-    console.log(mapTable);
-
-    console.log(recipesList);
 
     const testCases = [
       ["coulis", "tomate"],
