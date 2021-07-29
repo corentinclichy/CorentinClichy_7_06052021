@@ -197,10 +197,9 @@ class Search {
     const testCases = [
       ["coulis", "tomate"],
       ["dfgjgds", "tomate"],
-      ["creme", "coco", "limonade"],
     ];
 
-    let numberOfSearch = 1000000;
+    let numberOfSearch = 1000;
 
     console.time("testPerformanceFilteredRecipes");
     let start = performance.now();
@@ -217,7 +216,6 @@ class Search {
     let end = performance.now();
 
     console.log(`${numberOfSearch * testCases.length} recherches effectuées`);
-
     console.timeEnd("testPerformanceFilteredRecipes");
     console.log(`Recherche réalisée en ${end - start}ms`);
   }
