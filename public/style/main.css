@@ -10873,6 +10873,17 @@ textarea.form-control-lg {
   box-shadow: none;
 }
 
+.no-recipes-container {
+  width: 100%;
+}
+.no-recipes-container .search_suggestion {
+  cursor: pointer !important;
+  color: gray;
+}
+.no-recipes-container .search_suggestion:hover {
+  color: #242527;
+}
+
 header {
   color: #d04f4f;
 }

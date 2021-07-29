@@ -1,0 +1,51 @@
+body {
+  font-size: 1rem;
+}
+
+.logo {
+  height: fit-content;
+  width: 30%;
+}
+
+.search {
+  border-radius: 5px;
+  display: flex;
+  overflow: hidden;
+  background-color: #e7e7e7;
+  align-items: center;
+}
+
+.recipes {
+  .card {
+    width: 380px;
+    .card__image {
+      height: 178px;
+      background-color: #c7bebe;
+    }
+    .card-body {
+      background-color: #e7e7e7;
+      .card-headings {
+        .card-title {
+        }
+        .card-time {
+          p {
+            font-size: 18px;
+          }
+          i {
+            font-size: 18px;
+          }
+        }
+      }
+      .card-text {
+        .card-ingredients {
+          list-style: none;
+          font-size: 12px;
+        }
+        .card-recipeSteps {
+          font-size: 12px;
+          line-height: 12px;
+        }
+      }
+    }
+  }
+}

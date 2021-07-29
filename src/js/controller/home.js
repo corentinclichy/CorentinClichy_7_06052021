@@ -123,6 +123,11 @@ class HomeController {
         });
       } else {
         container.innerHTML = this.markup.noResults();
+        this.recipeHandler.showErrorMessage(
+          this.recipesContainer,
+          this.badgesContainer,
+          this.mainSearchInput
+        );
       }
     } else {
       const list = this.recipeHandler.allrecipes();
