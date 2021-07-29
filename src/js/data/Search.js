@@ -198,6 +198,7 @@ class Search {
     ];
 
     let timeArray;
+
     console.time("testPerformanceFilteredRecipes");
     let start = performance.now();
     for (let i = 0; i < 1000; i++) {
