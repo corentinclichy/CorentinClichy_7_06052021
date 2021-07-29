@@ -27,6 +27,7 @@ class Search {
     // get input and filter keywords
     let filterKeywordsNormArray = [];
     let inputKwNorm = [];
+
     let keywordsArray;
 
     //split and normalisze input keywords
@@ -79,7 +80,6 @@ class Search {
   testPerformanceFilteredRecipes(recipesList, keywordsInput) {
     this.filteredArray = recipes;
     recipesList = this.filteredArray;
-
     console.log(recipesList);
 
     const testCases = [
