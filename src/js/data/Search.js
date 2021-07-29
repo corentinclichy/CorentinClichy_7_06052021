@@ -199,10 +199,9 @@ class Search {
       ["dfgjgds", "tomate"],
     ];
 
-    let numberOfSearch = 1000;
+    let numberOfSearch = 10000;
 
     console.time("testPerformanceFilteredRecipes");
-    let start = performance.now();
     for (let i = 0; i < numberOfSearch; i++) {
       testCases.map((testCase) => {
         const filteredRecipes = this.getFilteredRecipes(
@@ -213,11 +212,8 @@ class Search {
       });
       // get the average time of timeArray
     }
-    let end = performance.now();
-
-    console.log(`${numberOfSearch * testCases.length} recherches effectuées`);
     console.timeEnd("testPerformanceFilteredRecipes");
-    console.log(`Recherche réalisée en ${end - start}ms`);
+    console.log(`(${numberOfSearch * testCases.length} recherches effectuées)`);
   }
 }
 
