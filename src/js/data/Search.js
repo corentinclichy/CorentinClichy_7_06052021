@@ -197,11 +197,11 @@ class Search {
       ["creme", "coco", "limonade"],
     ];
 
-    let timeArray;
+    let numberOfSearch = 1000000;
 
     console.time("testPerformanceFilteredRecipes");
     let start = performance.now();
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < numberOfSearch; i++) {
       testCases.map((testCase) => {
         const filteredRecipes = this.getFilteredRecipes(
           mapTable,
@@ -212,7 +212,7 @@ class Search {
     }
     let end = performance.now();
 
-    console.log(`${1000 * testCases.length} recherches effectuées`);
+    console.log(`${numberOfSearch * testCases.length} recherches effectuées`);
     console.timeEnd("testPerformanceFilteredRecipes");
     console.log(`Recherche effectuée en ${end - start}`);
   }
