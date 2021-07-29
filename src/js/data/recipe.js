@@ -64,6 +64,30 @@ class Recipe {
     return this.updatedRecipes;
   }
 
+  showErrorMessage(container, input) {
+    // Display error message if no recipes found
+    container.innerHTML = this.markup.noResults();
+
+    // Select all li element of container
+    let listOfSuggestions = container.querySelectorAll("li");
+    listOfSuggestions.forEach((item) => {
+      // Add a listener to the li element
+      item.addEventListener("click", (e) => {
+        // Delete the badges inside the badge container
+        this.badgesContainer.innerHTML = "";
+        // Reset the array of badges
+        this.badges = [...this.badgesContainer.children];
+        // Change the value of the input to the value of the li element
+        this.input.value = e.target.innerText;
+        input = this.input.value;
+        // Reset the container
+        container.innerHTML = "";
+        // Show the recipes associated to the new value
+        this.showRecipes(container, input);
+      });
+    });
+  }
+
   allrecipes() {
     let allRecipes = [...this.recipes];
 
