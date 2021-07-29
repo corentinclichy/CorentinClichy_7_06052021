@@ -197,7 +197,9 @@ class Search {
       ["creme", "coco", "limonade"],
     ];
 
+    let timeArray;
     console.time("testPerformanceFilteredRecipes");
+    let start = performance.now();
     for (let i = 0; i < 1000; i++) {
       testCases.map((testCase) => {
         const filteredRecipes = this.getFilteredRecipes(
@@ -207,9 +209,11 @@ class Search {
         );
       });
     }
+    let end = performance.now();
 
     console.log(`${1000 * testCases.length} recherches effectuées`);
     console.timeEnd("testPerformanceFilteredRecipes");
+    console.log(`Recherche effectuée en ${end - start}`);
   }
 }
 
