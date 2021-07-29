@@ -23,33 +23,37 @@ class Search {
    * @description Get all the keyword (input and badges) and filter the list of recipes
    * @returns {Array}
    **/
-  recipesSearchWithFilter(keywordInputTest, recipesListTest) {
+  recipesSearchWithFilter(keywordInputTest) {
     // get input and filter keywords
     let filterKeywordsNormArray = [];
     let inputKwNorm = [];
 
     let keywordsArray;
 
-    //split and normalisze input keywords
-    this.input.split(" ").forEach((inputkw) => {
-      inputKwNorm.push(this.helpers.normalize(inputkw));
-    });
+    if (Array.isArray(keywordInputTest)) {
+      keywordsArray = keywordInputTest;
+    } else {
+      //split and normalisze input keywords
+      this.input.split(" ").forEach((inputkw) => {
+        inputKwNorm.push(this.helpers.normalize(inputkw));
+      });
 
-    this.badges.length > 0
-      ? this.badges.forEach((badge) => {
-          this.helpers
-            .normalize(badge.innerText)
-            .split(" ")
-            .map((keyword) => {
-              filterKeywordsNormArray.push(keyword);
-            });
+      this.badges.length > 0
+        ? this.badges.forEach((badge) => {
+            this.helpers
+              .normalize(badge.innerText)
+              .split(" ")
+              .map((keyword) => {
+                filterKeywordsNormArray.push(keyword);
+              });
 
-          keywordsArray = [...inputKwNorm, ...filterKeywordsNormArray];
-        })
-      : (keywordsArray = [...inputKwNorm]);
+            keywordsArray = [...inputKwNorm, ...filterKeywordsNormArray];
+          })
+        : (keywordsArray = [...inputKwNorm]);
 
-    //take out stopwords from the array
-    keywordsArray = this.helpers.KeywordsWhitoutStopWords(keywordsArray);
+      //take out stopwords from the array
+      keywordsArray = this.helpers.KeywordsWhitoutStopWords(keywordsArray);
+    }
 
     //filtre avec l'ensemble des keyword
     // true or false
@@ -80,7 +84,6 @@ class Search {
   testPerformanceFilteredRecipes(recipesList, keywordsInput) {
     this.filteredArray = recipes;
     recipesList = this.filteredArray;
-    console.log(recipesList);
 
     const testCases = [
       ["coulis", "tomate"],

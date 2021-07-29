@@ -2,7 +2,6 @@ import HomeController from "./controller/home.js";
 import Search from "./data/Search.js";
 
 // Selectors
-
 const filterBtn = document.querySelectorAll(".btn-category");
 const filterchevron = document.querySelectorAll(".fa-chevron-down");
 const filterInputs = document.querySelectorAll(".filter-input");
