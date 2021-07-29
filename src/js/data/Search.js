@@ -30,7 +30,7 @@ class Search {
    * second index is the index of the recipes in the recipes array
    * */
   createMapTable() {
-    let mapRecipes = {};
+    let mapRecipes = new Set();
 
     this.filteredArray.forEach((recipe) => {
       let ingredientKeywordsSet = new Set();
@@ -66,12 +66,11 @@ class Search {
           // Check if the substring is already in the map
           if (substring in mapRecipes) {
             // if it is, add the index of the recipe to the array
-            mapRecipes[substring].add(this.filteredArray.indexOf(recipe));
+            // console.log(mapRecipes[substring]);
+            mapRecipes[substring].add(recipe);
           } else {
             // if it is not, create a new Set with the index of the recipe
-            mapRecipes[substring] = new Set([
-              this.filteredArray.indexOf(recipe),
-            ]);
+            mapRecipes[substring] = new Set([recipe]);
           }
         }
       });
@@ -149,44 +148,42 @@ class Search {
       : (recipesList = this.filteredArray);
 
     // const mapTable = this.createMapTable();
-    let keywordsRecipesIndex;
+    let keywordsRecipes;
 
     // For each keyword, if it is in the map table, get the recipes index
     keywordsInput.forEach((keyword) => {
       // If the keyword is in the map table
       // if it is, get the recipes index
       // if it is not, return an empty array
-      let indexIntersection = [];
+      let recipeIntersection = [];
       if (keyword in mapTable) {
         // get the recipes index (set)
         // get the intersection keywordsRecipesIndex at each interation
-        indexIntersection = [...mapTable[keyword]];
 
+        recipeIntersection = [...mapTable[keyword]];
         // if keywordRecipesIndex is empty
         // if it is, return the intersection
         // if it is not, return the union
-        if (keywordsRecipesIndex === undefined) {
-          keywordsRecipesIndex = [...indexIntersection];
+        if (keywordsRecipes === undefined) {
+          keywordsRecipes = [...recipeIntersection];
         } else {
-          keywordsRecipesIndex = [...keywordsRecipesIndex].filter((x) =>
-            [...indexIntersection].includes(x)
+          keywordsRecipes = [...keywordsRecipes].filter((x) =>
+            [...recipeIntersection].includes(x)
           );
         }
       } else {
-        indexIntersection = [...new Set()];
-        if (keywordsRecipesIndex === undefined) {
-          keywordsRecipesIndex = [...indexIntersection];
+        recipeIntersection = [...new Set()];
+        if (keywordsRecipes === undefined) {
+          keywordsRecipes = [...recipeIntersection];
         } else {
-          keywordsRecipesIndex = [...keywordsRecipesIndex].filter((x) =>
-            [...indexIntersection].includes(x)
+          keywordsRecipes = [...keywordsRecipes].filter((x) =>
+            [...recipeIntersection].includes(x)
           );
         }
       }
     });
 
-    return recipesList.filter((recipe, index) =>
-      [...keywordsRecipesIndex].includes(index)
-    );
+    return keywordsRecipes;
   }
 
   testPerformanceFilteredRecipes(mapTable, recipesList, keywordsInput) {
