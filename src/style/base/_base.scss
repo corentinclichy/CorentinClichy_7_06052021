@@ -41,9 +41,19 @@ body {
           list-style: none;
           font-size: 12px;
         }
-        .card-recipeSteps {
-          font-size: 12px;
-          line-height: 12px;
+        .module {
+          width: 100%;
+          width: 250px;
+          margin: 0 0 1em 0;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 7;
+          -webkit-box-orient: vertical;
+          text-overflow: ellipsis;
+          .card-recipeSteps {
+            font-size: 12px;
+            line-height: 16px;
+          }
         }
       }
     }

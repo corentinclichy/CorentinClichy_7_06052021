@@ -36,7 +36,7 @@ class Markup {
           </ul>
           <div class='module line-clamp'>
             <p class="card-recipeSteps p-0 m-0 flex-grow-1">
-            ${description}
+              ${description}
             </p>
           </div>
         </div>
