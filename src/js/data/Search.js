@@ -173,14 +173,7 @@ class Search {
           );
         }
       } else {
-        indexIntersection = [...new Set()];
-        if (keywordsRecipesIndex === undefined) {
-          keywordsRecipesIndex = [...indexIntersection];
-        } else {
-          keywordsRecipesIndex = [...keywordsRecipesIndex].filter((x) =>
-            [...indexIntersection].includes(x)
-          );
-        }
+        keywordsRecipesIndex = [...new Set()];
       }
     });
 
