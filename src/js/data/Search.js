@@ -199,7 +199,7 @@ class Search {
       ["dfgjgds", "tomate"],
     ];
 
-    let numberOfSearch = 10000;
+    let numberOfSearch = 1000;
 
     console.time("testPerformanceFilteredRecipes");
     for (let i = 0; i < numberOfSearch; i++) {
