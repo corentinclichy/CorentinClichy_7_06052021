@@ -4,7 +4,6 @@
   position: relative;
   width: 200px;
   &--ingredients {
-    // flex: 1;
     background-color: $blue;
   }
   &--appareils {
@@ -64,11 +63,29 @@
       background-color: $orange !important;
     }
     .wrapper {
-      .dropdown-item {
-        color: rgba(255, 255, 255, 0.705);
-        &:hover {
-          background-color: transparent;
-          color: white;
+      .dropdown-item__wrapper {
+        flex: 1 0 200px;
+        box-sizing: border-box;
+        overflow: hidden;
+        @include size("sm") {
+          max-width: calc(100%);
+        }
+        @include size("md") {
+          max-width: 100%;
+        }
+        @include size("lg") {
+          max-width: calc(200px);
+        }
+
+        .dropdown-item {
+          color: rgba(255, 255, 255, 0.705);
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &:hover {
+            background-color: transparent;
+            color: white;
+          }
         }
       }
     }

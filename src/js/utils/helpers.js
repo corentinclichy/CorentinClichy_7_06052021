@@ -1,28 +1,49 @@
+import stopWordsFr from "../data/stop_words_french.js";
+
+/**
+ * @description
+ * Class to handle different opérations on strings
+ * */
 class Helpers {
-  constructor(str) {
-    this.string = str;
+  /**
+   * @description
+   * Method to normalize the string
+   * @return {string}
+   **/
+  normalize(str) {
+    const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+    // Remove Accent
+    str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    // Remove ponctuation
+    str = str.replace(regex, " ").toLowerCase().trim();
+    // Return the string
+    return str;
   }
 
-  normalize(str) {
-    const map = {
-      "-": " ",
-      "-": "_",
-      " ": "'",
-      a: "á|à|ã|â|ä|À|Á|Ã|Â|Ä",
-      e: "é|è|ê|ë|É|È|Ê|Ë",
-      i: "í|ì|î|ï|Í|Ì|Î|Ï",
-      o: "ó|ò|ô|õ|ö|Ó|Ò|Ô|Õ|Ö",
-      u: "ú|ù|û|ü|Ú|Ù|Û|Ü",
-      c: "ç|Ç",
-      n: "ñ|Ñ",
-    };
+  /**
+   * @param {array} Array of string
+   * @description
+   * Method to remove stop words from a array of words
+   * @return {Array}
+   **/
+  keywordsWhitoutStopWords(keywordsArray) {
+    return keywordsArray.filter((item) => !stopWordsFr.includes(item));
+  }
 
-    for (var pattern in map) {
-      str = str.replace(new RegExp(map[pattern], "g"), pattern);
-      str = str.toLowerCase();
-    }
-
-    return str;
+  /**
+   * @param {string} string
+   * @description
+   * Method to remove stop words from a string
+   * @return {string}
+   * */
+  recipeParameterWithoutStopWords(string) {
+    // Split the string into an array of words
+    // and remove the stop words
+    // Then join the array back into a string
+    return string
+      .split(" ")
+      .filter((item) => !stopWordsFr.includes(item))
+      .join(" ");
   }
 }
 export default Helpers;

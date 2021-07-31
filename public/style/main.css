@@ -10732,6 +10732,14 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+header {
+  color: #d04f4f;
+}
+
+.categories {
+  max-width: 100%;
+}
+
 .search__input {
   border: none;
   height: 100%;
@@ -10807,10 +10815,32 @@ textarea.form-control-lg {
 .btn-category .dropdown-menu--ustensiles {
   background-color: #ed6454 !important;
 }
-.btn-category .dropdown-menu .wrapper .dropdown-item {
-  color: rgba(255, 255, 255, 0.705);
+.btn-category .dropdown-menu .wrapper .dropdown-item__wrapper {
+  flex: 1 0 200px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
-.btn-category .dropdown-menu .wrapper .dropdown-item:hover {
+@media (min-width: 640px) {
+  .btn-category .dropdown-menu .wrapper .dropdown-item__wrapper {
+    max-width: calc(100%);
+  }
+}
+@media (min-width: 768px) {
+  .btn-category .dropdown-menu .wrapper .dropdown-item__wrapper {
+    max-width: 100%;
+  }
+}
+@media (min-width: 1024px) {
+  .btn-category .dropdown-menu .wrapper .dropdown-item__wrapper {
+    max-width: calc(200px);
+  }
+}
+.btn-category .dropdown-menu .wrapper .dropdown-item__wrapper .dropdown-item {
+  color: rgba(255, 255, 255, 0.705);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-category .dropdown-menu .wrapper .dropdown-item__wrapper .dropdown-item:hover {
   background-color: transparent;
   color: white;
 }
@@ -10851,12 +10881,15 @@ textarea.form-control-lg {
   box-shadow: none;
 }
 
-header {
-  color: #d04f4f;
+.no-recipes-container {
+  width: 100%;
 }
-
-.categories {
-  max-width: 80%;
+.no-recipes-container .search_suggestion {
+  cursor: pointer !important;
+  color: gray;
+}
+.no-recipes-container .search_suggestion:hover {
+  color: #242527;
 }
 
 body {
@@ -10922,9 +10955,19 @@ body {
   list-style: none;
   font-size: 12px;
 }
-.recipes .card .card-body .card-text .card-recipeSteps {
+.recipes .card .card-body .card-text .module {
+  width: 100%;
+  width: 250px;
+  margin: 0 0 1em 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+.recipes .card .card-body .card-text .module .card-recipeSteps {
   font-size: 12px;
-  line-height: 12px;
+  line-height: 16px;
 }
 
 /*# sourceMappingURL=main.css.map */
