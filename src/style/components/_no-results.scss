@@ -1,0 +1,11 @@
+.no-recipes-container {
+  width: 100%;
+
+  .search_suggestion {
+    cursor: pointer !important;
+    color: gray;
+    &:hover {
+      color: rgb(36, 37, 39);
+    }
+  }
+}

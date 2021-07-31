@@ -1,190 +1,121 @@
 import HomeController from "./controller/home.js";
+import Search from "./data/Search.js";
 
 // Selectors
-
-const filterBtn = document.querySelectorAll(".btn-category");
-const filterchevron = document.querySelectorAll(".fa-chevron-down");
 const filterInputs = document.querySelectorAll(".filter-input");
 const filterItems = document.querySelectorAll(".dropdown-item");
 const badgesContainer = document.querySelector(".badges");
-const badges = document.querySelectorAll(".badge");
-const badgesCloseBtn = document.querySelectorAll(".fa-times-circle");
-
-// inputs
 const inputs = document.querySelectorAll("input");
 const mainSearchInput = document.querySelector(".search__input");
-const ingredientsInput = document.querySelector(".filter-input--ingredients");
-const appliancesInput = document.querySelector(".filter-input--appliances");
-const ustensilsInput = document.querySelector(".filter-input--ustensils");
-const btnElements = [...filterBtn, ...filterchevron, ...filterItems];
-
 const ingredientsFilterList = document.querySelector("#ingredient-list");
 const appareilsFilterList = document.querySelector("#appareils-list");
 const ustensilesFilterList = document.querySelector("#ustensiles-list");
 const recipesContainer = document.querySelector(".recipes");
 
 //initialization
-const homeController = new HomeController();
+const homeController = new HomeController(
+  recipesContainer,
+  badgesContainer,
+  mainSearchInput
+);
 homeController.showRecipes(recipesContainer, "");
 
 //Click on filter buttons
 filterInputs.forEach((filterInput) => {
   filterInput.addEventListener("click", (e) => {
-    homeController.showfilter(e.target);
-
+    // Reset all filters Container
     filterInputs.forEach((filterInput) => {
       homeController.resetFilter(filterInput);
     });
+    // Display the list of items inside the dropdown
+    homeController.showfilter(e.target);
 
-    let filterName;
-    let filterItemName;
-
+    //Show associated filter items list
     switch (e.target.name) {
       case "ingredient":
-        filterName = "ingredients";
-        filterItemName = "ingredient";
         homeController.showFilterItems(
           ingredientsFilterList,
-          filterName,
-          filterItemName
+          "ingredients",
+          "ingredient"
         );
 
         break;
-      case "appliance":
-        filterName = "appliance";
-        filterItemName = "appliance";
+      case "appareil":
         homeController.showFilterItems(
           appareilsFilterList,
-          filterName,
-          filterItemName
+          "appliance",
+          "appliance"
         );
         break;
       case "ustensile":
-        filterName = "ustensils";
-        filterItemName = "ustensile";
         homeController.showFilterItems(
           ustensilesFilterList,
-          filterName,
-          filterItemName
+          "ustensils",
+          "ustensile"
         );
         break;
       default:
+        console.log("error displaying the correct item filters");
         break;
     }
   });
-  filterItems.forEach((ing) => {
-    ing.addEventListener("click", (e) => {
+  // Add specific click event to each item in the dropdown
+  filterItems.forEach((item) => {
+    item.addEventListener("click", (e) => {
       homeController.addBadge(e, badgesContainer);
     });
   });
 });
 
+// Reset filter if click outisde filter container
 document.addEventListener("click", (e) => {
-  console.log(e.target);
-
   if (!e.target.matches(".filter-input")) {
     filterInputs.forEach((filterInput) => {
       homeController.resetFilter(filterInput);
     });
   }
 });
-// btnElements.forEach((btn) => {
-//   btn.addEventListener("click", (e) => {
-//     //reset input
-//     filterInputs.forEach((input) => {
-//       homeController.resetFilter(input);
-//     });
-//     //show dropdown filter
-//     homeController.showfilter(e.target);
-//     console.log(e.target);
-
-//     let filterName;
-//     let filterItemName;
-
-//     switch (e.target.name) {
-//       case "ingredient":
-//         filterName = "ingredients";
-//         filterItemName = "ingredient";
-//         homeController.showFilterItems(
-//           ingredientsFilterList,
-//           filterName,
-//           filterItemName
-//         );
-
-//         break;
-//       case "appliance":
-//         filterName = "appliance";
-//         filterItemName = "appliance";
-//         homeController.showFilterItems(
-//           appareilsFilterList,
-//           filterName,
-//           filterItemName
-//         );
-//         break;
-//       case "ustensile":
-//         filterName = "ustensils";
-//         filterItemName = "ustensile";
-//         homeController.showFilterItems(
-//           ustensilesFilterList,
-//           filterName,
-//           filterItemName
-//         );
-//         break;
-//       default:
-//         break;
-//     }
-//   });
-
-//   filterItems.forEach((filterItem) => {
-//     filterItem.addEventListener("click", (e) => {
-//       homeController.addBadge(e, badgesContainer);
-//     });
-//   });
-// });
 
 inputs.forEach((input) => {
+  // display the list of items inside the dropdown if the user type in the input
   input.addEventListener("input", (e) => {
-    const input = e.target.value;
-    const inputName = e.target.getAttribute("name");
-
-    let filterName;
-    let filterItemName;
-
-    switch (inputName) {
+    switch (e.target.getAttribute("name")) {
       case "ingredient":
-        filterName = "ingredients";
-        filterItemName = "ingredient";
         homeController.showFilterItems(
           ingredientsFilterList,
-          filterName,
-          filterItemName,
-          input
+          "ingredients",
+          "ingredient",
+          e.target.value
         );
 
         break;
-      case "appliance":
-        filterName = "appliance";
-        filterItemName = "appliance";
+      case "appareil":
         homeController.showFilterItems(
           appareilsFilterList,
-          filterName,
-          filterItemName,
-          input
+          "appliance",
+          "appliance",
+          e.target.value
         );
         break;
       case "ustensile":
-        filterName = "ustensils";
-        filterItemName = "ustensile";
         homeController.showFilterItems(
           ustensilesFilterList,
-          filterName,
-          filterItemName,
-          input
+          "ustensils",
+          "ustensile",
+          e.target.value
         );
         break;
-
+      // If the user in the main search input, display the list of recipes
+      case "mainSearchInput":
+        homeController.showRecipes(recipesContainer, e.target.value);
+        break;
       default:
+        console.log("error displaying the filtered recipes");
         break;
     }
   });
 });
+
+/// TEST PERFORMANCE
+const search = new Search();
+search.testPerformanceFilteredRecipes();

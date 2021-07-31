@@ -5,49 +5,70 @@ import Search from "./search.js";
 class Recipe {
   constructor(ingredients, appareils, ustensils) {
     this.recipes = recipes;
-    this.ingredients = [];
-    this.ustensils = [];
-    this.appareils = [];
     this.helpers = new Helpers();
+    this.updatedRecipes = [];
+    this.mapTable = new Search("", this.recipes, "").createMapTable();
   }
 
+  //TODO: COMMENT THIS CODE
   listOfFilter(filterName, filterItemName, input) {
-    let filteredArray = new Set();
-
+    let filterItemList = new Set();
     /// Input empty or input is not empty
-
-    this.recipes.map((recipe) => {
-      if (Array.isArray(recipe[filterName])) {
-        recipe[filterName].map((filterItem) => {
-          if (filterItem[filterItemName] === undefined) {
-            filteredArray.add(filterItem);
-          } else {
-            filteredArray.add(filterItem[filterItemName]);
-          }
-        });
-      } else {
-        filteredArray.add(recipe[filterItemName]);
-      }
-    });
+    if (this.updatedRecipes.length === 0) {
+      this.recipes.map((recipe) => {
+        // check if the parameter is an array (ex: recipe.ingredients === ARRAY)
+        if (Array.isArray(recipe[filterName])) {
+          recipe[filterName].map((filterItem) => {
+            if (filterItem[filterItemName] === undefined) {
+              filterItemList.add(filterItem);
+            } else {
+              filterItemList.add(filterItem[filterItemName]);
+            }
+          });
+        } else {
+          filterItemList.add(recipe[filterItemName]);
+        }
+      });
+    } else {
+      this.updatedRecipes.map((recipe) => {
+        if (Array.isArray(recipe[filterName])) {
+          recipe[filterName].map((filterItem) => {
+            if (filterItem[filterItemName] === undefined) {
+              filterItemList.add(filterItem);
+            } else {
+              filterItemList.add(filterItem[filterItemName]);
+            }
+          });
+        } else {
+          filterItemList.add(recipe[filterItemName]);
+        }
+      });
+    }
 
     if (input === undefined) {
-      return filteredArray;
+      return filterItemList;
     } else {
-      filteredArray = [...filteredArray];
-
-      const search = new Search(input, filteredArray);
-      const searchFilterItems = search.filterSearch();
-      return searchFilterItems;
+      return new Search(input, [...filterItemList]).filterSearch();
     }
   }
 
-  listOfRecipes(input) {
-    let filteredRecipes = [];
-    if (input === "") {
-      filteredRecipes = [...this.recipes];
-    }
+  filteredRecipes(input, badges) {
+    this.updatedRecipes = new Search(
+      input,
+      this.recipes,
+      badges
+    ).getFilteredRecipes(this.mapTable);
+    return this.updatedRecipes;
+  }
 
-    return filteredRecipes;
+  /**
+   * @returns {Array} Array of recipes
+   * @description
+   * Gives back an array of all recipes and generate the hashTable
+   */
+  allrecipes() {
+    this.updatedRecipes = [];
+    return [...this.recipes];
   }
 }
 

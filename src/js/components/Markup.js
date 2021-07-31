@@ -1,9 +1,12 @@
+/**
+ * @module Markup
+ * @description
+ * Class for all the markup components
+ **/
 class Markup {
-  constructor() {}
-
   filterItem(filterItemName, name) {
     return `
-    <li>
+    <li class="dropdown-item__wrapper">
       <a class="dropdown-item dropdown-item--${filterItemName}" href="#">${name}</a>
     </li>
     `;
@@ -34,9 +37,11 @@ class Markup {
             )
             .join("")}
           </ul>
-          <p class="card-recipeSteps p-0 m-0 flex-grow-1 w-50">
+          <div class='module line-clamp'>
+            <p class="card-recipeSteps p-0 m-0 flex-grow-1">
             ${description}
-          </p>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -49,6 +54,21 @@ class Markup {
           <span class="pe-5">${badgeName}</span>
           <i class="far fa-times-circle"></i>
     </button>
+    `;
+  }
+
+  noResults() {
+    return `
+    <div class="no-recipes-container d-flex flex-column align-items-center justify-content-center mt-5">
+      <p>Il n'y a pas de résutlat</p>
+      <p>Vous pouvez par exemple rechercher:</p>
+      <ul class='list-unstyled text-center'>
+        <li class="search_suggestion">Salade</li>
+        <li class="search_suggestion">Gratin</li>
+        <li class="search_suggestion">Smoothie</li>
+      </ul>
+    </div>
+
     `;
   }
 }
