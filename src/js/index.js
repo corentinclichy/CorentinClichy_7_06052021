@@ -1,19 +1,19 @@
-import HomeController from "./controller/home.js";
-import Search from "./data/Search.js";
+import HomeController from './controller/home.js';
+import Search from './data/Search.js';
 
 // Selectors
-const filterInputs = document.querySelectorAll(".filter-input");
-const filterItems = document.querySelectorAll(".dropdown-item");
-const badgesContainer = document.querySelector(".badges");
+const filterInputs = document.querySelectorAll('.filter-input');
+const filterItems = document.querySelectorAll('.dropdown-item');
+const badgesContainer = document.querySelector('.badges');
 
 // inputs
-const inputs = document.querySelectorAll("input");
-const mainSearchInput = document.querySelector(".search__input");
+const inputs = document.querySelectorAll('input');
+const mainSearchInput = document.querySelector('.search__input');
 
-const ingredientsFilterList = document.querySelector("#ingredient-list");
-const appareilsFilterList = document.querySelector("#appareils-list");
-const ustensilesFilterList = document.querySelector("#ustensiles-list");
-const recipesContainer = document.querySelector(".recipes");
+const ingredientsFilterList = document.querySelector('#ingredient-list');
+const appareilsFilterList = document.querySelector('#appareils-list');
+const ustensilesFilterList = document.querySelector('#ustensiles-list');
+const recipesContainer = document.querySelector('.recipes');
 
 //initialization
 const homeController = new HomeController(
@@ -21,11 +21,11 @@ const homeController = new HomeController(
   badgesContainer,
   mainSearchInput
 );
-homeController.showRecipes(recipesContainer, "");
+homeController.showRecipes(recipesContainer, '');
 
 //Click on filter buttons
 filterInputs.forEach((filterInput) => {
-  filterInput.addEventListener("click", (e) => {
+  filterInput.addEventListener('click', (e) => {
     homeController.showfilter(e.target);
 
     filterInputs.forEach((filterInput) => {
@@ -36,9 +36,9 @@ filterInputs.forEach((filterInput) => {
     let filterItemName;
 
     switch (e.target.name) {
-      case "ingredient":
-        filterName = "ingredients";
-        filterItemName = "ingredient";
+      case 'ingredient':
+        filterName = 'ingredients';
+        filterItemName = 'ingredient';
         homeController.showFilterItems(
           ingredientsFilterList,
           filterName,
@@ -46,18 +46,18 @@ filterInputs.forEach((filterInput) => {
         );
 
         break;
-      case "appareil":
-        filterName = "appliance";
-        filterItemName = "appliance";
+      case 'appareil':
+        filterName = 'appliance';
+        filterItemName = 'appliance';
         homeController.showFilterItems(
           appareilsFilterList,
           filterName,
           filterItemName
         );
         break;
-      case "ustensile":
-        filterName = "ustensils";
-        filterItemName = "ustensile";
+      case 'ustensile':
+        filterName = 'ustensils';
+        filterItemName = 'ustensile';
         homeController.showFilterItems(
           ustensilesFilterList,
           filterName,
@@ -69,14 +69,14 @@ filterInputs.forEach((filterInput) => {
     }
   });
   filterItems.forEach((ing) => {
-    ing.addEventListener("click", (e) => {
+    ing.addEventListener('click', (e) => {
       homeController.addBadge(e, badgesContainer);
     });
   });
 });
 
-document.addEventListener("click", (e) => {
-  if (!e.target.matches(".filter-input")) {
+document.addEventListener('click', (e) => {
+  if (!e.target.matches('.filter-input')) {
     filterInputs.forEach((filterInput) => {
       homeController.resetFilter(filterInput);
     });
@@ -84,17 +84,17 @@ document.addEventListener("click", (e) => {
 });
 
 inputs.forEach((input) => {
-  input.addEventListener("input", (e) => {
+  input.addEventListener('input', (e) => {
     const input = e.target.value;
-    const inputName = e.target.getAttribute("name");
+    const inputName = e.target.getAttribute('name');
 
     let filterName;
     let filterItemName;
 
     switch (inputName) {
-      case "ingredient":
-        filterName = "ingredients";
-        filterItemName = "ingredient";
+      case 'ingredient':
+        filterName = 'ingredients';
+        filterItemName = 'ingredient';
         homeController.showFilterItems(
           ingredientsFilterList,
           filterName,
@@ -103,9 +103,9 @@ inputs.forEach((input) => {
         );
 
         break;
-      case "appliance":
-        filterName = "appliance";
-        filterItemName = "appliance";
+      case 'appliance':
+        filterName = 'appliance';
+        filterItemName = 'appliance';
         homeController.showFilterItems(
           appareilsFilterList,
           filterName,
@@ -113,9 +113,9 @@ inputs.forEach((input) => {
           input
         );
         break;
-      case "ustensile":
-        filterName = "ustensils";
-        filterItemName = "ustensile";
+      case 'ustensile':
+        filterName = 'ustensils';
+        filterItemName = 'ustensile';
         homeController.showFilterItems(
           ustensilesFilterList,
           filterName,
@@ -124,7 +124,7 @@ inputs.forEach((input) => {
         );
         break;
 
-      case "mainSearchInput":
+      case 'mainSearchInput':
         homeController.showRecipes(recipesContainer, input);
         break;
 

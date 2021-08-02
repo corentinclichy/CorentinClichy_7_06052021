@@ -27,12 +27,12 @@ class Markup {
             .map(
               (ingredient) =>
                 `<li><strong>${ingredient.ingredient}${
-                  "quantity" in ingredient ? ":" : ""
+                  'quantity' in ingredient ? ':' : ''
                 }</strong> ${
-                  "quantity" in ingredient ? ingredient.quantity : ""
-                } ${"unit" in ingredient ? ingredient.unit : ""}</li>`
+                  'quantity' in ingredient ? ingredient.quantity : ''
+                } ${'unit' in ingredient ? ingredient.unit : ''}</li>`
             )
-            .join("")}
+            .join('')}
           </ul>
           <div class='module line-clamp'>
             <p class="card-recipeSteps p-0 m-0 flex-grow-1">
