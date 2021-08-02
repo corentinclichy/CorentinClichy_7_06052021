@@ -1,5 +1,5 @@
-import { recipes } from "../../ressources/data.js";
-import Helpers from "../utils/helpers.js";
+import { recipes } from '../../ressources/data.js';
+import Helpers from '../utils/helpers.js';
 
 class Search {
   //this.input @string
@@ -52,9 +52,9 @@ class Search {
       const keywordsArray = [
         ...this._splitAndTakeOffStopWords(recipe.name),
         ...this._splitAndTakeOffStopWords(recipe.description),
-        ...this._splitAndTakeOffStopWords([...ingredientKeywordsSet].join(" ")),
-        ...this._splitAndTakeOffStopWords([...appliancesKeywordsSet].join(" ")),
-        ...this._splitAndTakeOffStopWords([...ustensilsKeywordsSet].join(" ")),
+        ...this._splitAndTakeOffStopWords([...ingredientKeywordsSet].join(' ')),
+        ...this._splitAndTakeOffStopWords([...appliancesKeywordsSet].join(' ')),
+        ...this._splitAndTakeOffStopWords([...ustensilsKeywordsSet].join(' '))
       ];
 
       // for each keyword
@@ -86,7 +86,7 @@ class Search {
    * */
   _splitAndTakeOffStopWords(string) {
     // split string into an array of words and normalize each word
-    const stringArray = this.helpers.normalize(string).split(" ");
+    const stringArray = this.helpers.normalize(string).split(' ');
     // remove stop words from the array and return the array
     return this.helpers.keywordsWhitoutStopWords(stringArray);
   }
@@ -101,7 +101,7 @@ class Search {
     let keywordsArray;
 
     // Normalize input and split into an array of words
-    const inputKw = this.helpers.normalize(this.input).split(" ");
+    const inputKw = this.helpers.normalize(this.input).split(' ');
 
     // If there is badge
     // If there is no badge keywordArray equal to the input keywords
@@ -111,7 +111,7 @@ class Search {
           // add the badge to the array filterKeywordsNormArray
           this.helpers
             .normalize(badge.innerText)
-            .split(" ")
+            .split(' ')
             .map((keyword) => {
               filterKeywordsNormArray.push(keyword);
             });
@@ -119,7 +119,7 @@ class Search {
           // If the input is empty
           // If it is keyword array equal only to the badge array
           // if it is not, keywordArray equal to the combination of the badge array and the input array
-          inputKw[0] === ""
+          inputKw[0] === ''
             ? (keywordsArray = [...filterKeywordsNormArray])
             : (keywordsArray = [...inputKw, ...filterKeywordsNormArray]);
         })
@@ -185,13 +185,13 @@ class Search {
     mapTable = this.createMapTable();
 
     const testCases = [
-      ["coulis", "tomate"],
-      ["dfgjgds", "tomate"],
+      ['coulis', 'tomate'],
+      ['dfgjgds', 'tomate']
     ];
 
     let numberOfSearch = 1000;
 
-    console.time("testPerformanceFilteredRecipes");
+    console.time('testPerformanceFilteredRecipes');
     for (let i = 0; i < numberOfSearch; i++) {
       testCases.map((testCase) => {
         const filteredRecipes = this.getFilteredRecipes(
@@ -201,7 +201,7 @@ class Search {
         );
       });
     }
-    console.timeEnd("testPerformanceFilteredRecipes");
+    console.timeEnd('testPerformanceFilteredRecipes');
     console.log(`(${numberOfSearch * testCases.length} recherches effectuées)`);
   }
 }

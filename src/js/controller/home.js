@@ -1,5 +1,5 @@
-import Markup from "../components/Markup.js";
-import RecipeHandler from "../data/recipe.js";
+import Markup from '../components/Markup.js';
+import RecipeHandler from '../data/recipe.js';
 
 /**
  * @method HomeController
@@ -16,7 +16,7 @@ class HomeController {
     this.badgesContainer = badgesContainer;
     this.mainSearchInput = mainSearchInput;
     this.badges = [];
-    this.input = document.querySelector(".search__input");
+    this.input = document.querySelector('.search__input');
   }
 
   /**
@@ -29,8 +29,8 @@ class HomeController {
     setTimeout(() => {
       el.focus();
       el.placeholder = `Recherche un ${el.name}`;
-      if (el.parentNode.classList.contains("show")) {
-        el.parentNode.parentNode.classList.add("showFilter");
+      if (el.parentNode.classList.contains('show')) {
+        el.parentNode.parentNode.classList.add('showFilter');
       }
     }, 0);
   }
@@ -42,9 +42,9 @@ class HomeController {
    **/
   resetFilter(el) {
     // Remove the showFilter class to hide the filters
-    el.parentNode.parentNode.classList.remove("showFilter");
+    el.parentNode.parentNode.classList.remove('showFilter');
     //Change the placeholder to the default value with capital letter for the first char and a s at the end
-    el.value = "";
+    el.value = '';
     el.placeholder = `${el.name.charAt(0).toUpperCase() + el.name.slice(1)}s`;
   }
 
@@ -56,14 +56,14 @@ class HomeController {
     // Check if the badge contains a specific css class
     let typeOfBadge;
     switch (true) {
-      case el.target.classList.contains("dropdown-item--ingredient"):
-        typeOfBadge = "ingredients";
+      case el.target.classList.contains('dropdown-item--ingredient'):
+        typeOfBadge = 'ingredients';
         break;
-      case el.target.classList.contains("dropdown-item--appliance"):
-        typeOfBadge = "appareils";
+      case el.target.classList.contains('dropdown-item--appliance'):
+        typeOfBadge = 'appareils';
         break;
-      case el.target.classList.contains("dropdown-item--ustensile"):
-        typeOfBadge = "ustensiles";
+      case el.target.classList.contains('dropdown-item--ustensile'):
+        typeOfBadge = 'ustensiles';
         break;
     }
 
@@ -87,7 +87,7 @@ class HomeController {
    **/
   _deleteBadge(badge, container) {
     //Add an even listener to the badge cross icon to delete it
-    badge.children[1].addEventListener("click", (e) => {
+    badge.children[1].addEventListener('click', (e) => {
       container.removeChild(e.target.parentNode);
       this.badges = [...this.badgesContainer.children];
       // Show associated recipes
@@ -108,7 +108,7 @@ class HomeController {
    * @return null
    **/
   showFilterItems(container, filterName, filterItemName, input) {
-    container.innerHTML = "";
+    container.innerHTML = '';
 
     // Display the filter item on each filter container
     this.recipeHandler
@@ -119,7 +119,7 @@ class HomeController {
 
     // add a listener to the filter item to add it to the badge container
     for (let item of container.children) {
-      item.addEventListener("click", (e) => {
+      item.addEventListener('click', (e) => {
         this._addBadge(e);
         this.badges = [...this.badgesContainer.children];
         //update the recipes associeted to the filter
@@ -142,19 +142,19 @@ class HomeController {
     container.innerHTML = this.markup.noResults();
 
     // Select all li element of container
-    let listOfSuggestions = container.querySelectorAll("li");
+    let listOfSuggestions = container.querySelectorAll('li');
     listOfSuggestions.forEach((item) => {
       // Add a listener to the li element
-      item.addEventListener("click", (e) => {
+      item.addEventListener('click', (e) => {
         // Delete the badges inside the badge container
-        this.badgesContainer.innerHTML = "";
+        this.badgesContainer.innerHTML = '';
         // Reset the array of badges
         this.badges = [...this.badgesContainer.children];
         // Change the value of the input to the value of the li element
         this.input.value = e.target.innerText;
         input = this.input.value;
         // Reset the container
-        container.innerHTML = "";
+        container.innerHTML = '';
         // Show the recipes associated to the new value
         this.showRecipes(container, input);
       });
@@ -169,8 +169,8 @@ class HomeController {
    **/
   showRecipes(container, input) {
     // If input is not empty and input.length > 3 OU if there is selected badges
-    if ((input !== "" && input.length >= 3) || this.badges.length !== 0) {
-      container.innerHTML = "";
+    if ((input !== '' && input.length >= 3) || this.badges.length !== 0) {
+      container.innerHTML = '';
       // Use the filtered method to get the associated recipes
       // if there is no recipes, display an error message
       this.recipeHandler.filteredRecipes(input, this.badges).length !== 0
@@ -182,13 +182,13 @@ class HomeController {
                 description: description,
                 ingredients: ingredients,
                 time: time,
-                ustensils: ustensils,
+                ustensils: ustensils
               });
             })
         : this.showErrorMessage(container, input);
     } else {
       // If there is no filter or selected badge, show all the recipes
-      container.innerHTML = "";
+      container.innerHTML = '';
       this.recipeHandler
         .allrecipes()
         .map(({ name, description, ingredients, time, ustensils }) => {
@@ -197,7 +197,7 @@ class HomeController {
             description: description,
             ingredients: ingredients,
             time: time,
-            ustensils: ustensils,
+            ustensils: ustensils
           });
         });
     }
