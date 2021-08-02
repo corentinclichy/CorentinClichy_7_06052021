@@ -1,0 +1,11 @@
+{
+    "extends": ["prettier"],
+    "plugins": ["prettier"],
+    "env": { "es6": true, "browser": true },
+    "rules": {
+      "prettier/prettier": 2 // Means error
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    }
+  }
