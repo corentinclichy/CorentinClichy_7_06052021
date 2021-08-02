@@ -2,21 +2,13 @@ import HomeController from "./controller/home.js";
 import Search from "./data/Search.js";
 
 // Selectors
-const filterBtn = document.querySelectorAll(".btn-category");
-const filterchevron = document.querySelectorAll(".fa-chevron-down");
 const filterInputs = document.querySelectorAll(".filter-input");
 const filterItems = document.querySelectorAll(".dropdown-item");
 const badgesContainer = document.querySelector(".badges");
-const badges = document.querySelectorAll(".badge");
-const badgesCloseBtn = document.querySelectorAll(".fa-times-circle");
 
 // inputs
 const inputs = document.querySelectorAll("input");
 const mainSearchInput = document.querySelector(".search__input");
-const ingredientsInput = document.querySelector(".filter-input--ingredients");
-const appliancesInput = document.querySelector(".filter-input--appliances");
-const ustensilsInput = document.querySelector(".filter-input--ustensils");
-const btnElements = [...filterBtn, ...filterchevron, ...filterItems];
 
 const ingredientsFilterList = document.querySelector("#ingredient-list");
 const appareilsFilterList = document.querySelector("#appareils-list");
