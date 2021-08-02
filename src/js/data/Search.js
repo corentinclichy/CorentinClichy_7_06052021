@@ -1,5 +1,5 @@
-import { recipes } from "../../ressources/data.js";
-import Helpers from "../utils/helpers.js";
+import { recipes } from '../../ressources/data.js';
+import Helpers from '../utils/helpers.js';
 
 class Search {
   constructor(input, filteredArray, badges) {
@@ -34,7 +34,7 @@ class Search {
       keywordsArray = keywordInputTest;
     } else {
       //split and normalisze input keywords
-      this.input.split(" ").forEach((inputkw) => {
+      this.input.split(' ').forEach((inputkw) => {
         inputKwNorm.push(this.helpers.normalize(inputkw));
       });
 
@@ -42,7 +42,7 @@ class Search {
         ? this.badges.forEach((badge) => {
             this.helpers
               .normalize(badge.innerText)
-              .split(" ")
+              .split(' ')
               .map((keyword) => {
                 filterKeywordsNormArray.push(keyword);
               });
@@ -86,13 +86,13 @@ class Search {
     recipesList = this.filteredArray;
 
     const testCases = [
-      ["coulis", "tomate"],
-      ["dfgjgds", "tomate"],
+      ['coulis', 'tomate'],
+      ['dfgjgds', 'tomate']
     ];
 
     const numberOfSearch = 10000;
 
-    console.time("testPerformanceFilteredRecipes");
+    console.time('testPerformanceFilteredRecipes');
     for (let i = 0; i < numberOfSearch; i++) {
       testCases.map((testCase) => {
         const filteredRecipes = this.recipesSearchWithFilter(
@@ -101,7 +101,7 @@ class Search {
         );
       });
     }
-    console.timeEnd("testPerformanceFilteredRecipes");
+    console.timeEnd('testPerformanceFilteredRecipes');
     console.log(`(${numberOfSearch * testCases.length} recherches effectuées)`);
   }
 }

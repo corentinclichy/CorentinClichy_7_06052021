@@ -1,6 +1,6 @@
-import Markup from "../components/Markup.js";
-import RecipeHandler from "../data/recipe.js";
-import Search from "../data/Search.js";
+import Markup from '../components/Markup.js';
+import RecipeHandler from '../data/recipe.js';
+import Search from '../data/Search.js';
 
 class HomeController {
   constructor(recipesContainer, badgesContainer, mainSearchInput) {
@@ -18,8 +18,8 @@ class HomeController {
     setTimeout(() => {
       el.focus();
       el.placeholder = `Recherche un ${el.name}`;
-      if (el.parentNode.classList.contains("show")) {
-        el.parentNode.parentNode.classList.add("showFilter");
+      if (el.parentNode.classList.contains('show')) {
+        el.parentNode.parentNode.classList.add('showFilter');
       }
     }, 0);
 
@@ -29,7 +29,7 @@ class HomeController {
   resetFilter(el) {
     //select the .btn-category
 
-    el.parentNode.parentNode.classList.remove("showFilter");
+    el.parentNode.parentNode.classList.remove('showFilter');
 
     //Change the placeholder
     let name = el.name;
@@ -43,14 +43,14 @@ class HomeController {
     let badges;
     //reset the container
 
-    if (el.target.classList.contains("dropdown-item--ingredient"))
-      typeOfBadge = "ingredients";
+    if (el.target.classList.contains('dropdown-item--ingredient'))
+      typeOfBadge = 'ingredients';
 
-    if (el.target.classList.contains("dropdown-item--appliance"))
-      typeOfBadge = "appareils";
+    if (el.target.classList.contains('dropdown-item--appliance'))
+      typeOfBadge = 'appareils';
 
-    if (el.target.classList.contains("dropdown-item--ustensile"))
-      typeOfBadge = "ustensiles";
+    if (el.target.classList.contains('dropdown-item--ustensile'))
+      typeOfBadge = 'ustensiles';
 
     let index = this.badgesContainer.children.length;
     this.badgesContainer.innerHTML += this.markup.badge(
@@ -68,7 +68,7 @@ class HomeController {
 
   _deleteBadge(badge, container) {
     let closeBtn = badge.children[1];
-    closeBtn.addEventListener("click", (e) => {
+    closeBtn.addEventListener('click', (e) => {
       let badgeToDelete = e.target.parentNode;
       container.removeChild(badgeToDelete);
       this.badges = this._listOfSelectedBadges(this.badgesContainer);
@@ -86,13 +86,13 @@ class HomeController {
       filterItemName,
       input
     );
-    container.innerHTML = "";
+    container.innerHTML = '';
     list.forEach((item) => {
       container.innerHTML += this.markup.filterItem(filterItemName, item);
     });
 
     for (let item of container.children) {
-      item.addEventListener("click", (e) => {
+      item.addEventListener('click', (e) => {
         this._addBadge(e);
         this.badges = this._listOfSelectedBadges(this.badgesContainer);
         this.showRecipes(
@@ -105,8 +105,8 @@ class HomeController {
   }
 
   showRecipes(container, input) {
-    if ((input !== "" && input.length >= 3) || this.badges.length !== 0) {
-      container.innerHTML = "";
+    if ((input !== '' && input.length >= 3) || this.badges.length !== 0) {
+      container.innerHTML = '';
 
       const list = this.recipeHandler.filteredRecipes(input, this.badges);
 
@@ -117,7 +117,7 @@ class HomeController {
             description: item.description,
             ingredients: item.ingredients,
             time: item.time,
-            ustensils: item.ustensils,
+            ustensils: item.ustensils
           };
           container.innerHTML += this.markup.recipeCard(recipe);
         });
@@ -131,7 +131,7 @@ class HomeController {
       }
     } else {
       const list = this.recipeHandler.allrecipes();
-      container.innerHTML = "";
+      container.innerHTML = '';
 
       list.map((item) => {
         const recipe = {
@@ -139,7 +139,7 @@ class HomeController {
           description: item.description,
           ingredients: item.ingredients,
           time: item.time,
-          ustensils: item.ustensils,
+          ustensils: item.ustensils
         };
         container.innerHTML += this.markup.recipeCard(recipe);
       });
@@ -148,22 +148,22 @@ class HomeController {
 
   showErrorMessage(container, badgeContainer, input) {
     // Select all li element of container
-    let listOfSuggestions = container.querySelectorAll("li");
+    let listOfSuggestions = container.querySelectorAll('li');
     console.log(listOfSuggestions);
 
     listOfSuggestions.forEach((item) => {
       // Add a listener to the li element
-      item.addEventListener("click", (e) => {
-        console.log("click");
+      item.addEventListener('click', (e) => {
+        console.log('click');
         // Delete the badges inside the badge container
-        badgeContainer.innerHTML = "";
+        badgeContainer.innerHTML = '';
         // Reset the array of badges
         this.badges = [...badgeContainer.children];
         // Change the value of the input to the value of the li element
         input.value = e.target.innerText;
         input = input.value;
         // Reset the container
-        container.innerHTML = "";
+        container.innerHTML = '';
         // Show the recipes associated to the new value
         this.showRecipes(container, input);
       });
