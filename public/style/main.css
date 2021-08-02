@@ -10970,4 +10970,9 @@ body {
   line-height: 16px;
 }
 
+ul {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /*# sourceMappingURL=main.css.map */
