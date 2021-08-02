@@ -1,6 +1,6 @@
 import Helpers from '../utils/helpers.js';
 import { recipes } from '../../ressources/data.js';
-import Search from './search.js';
+import Search from './Search.js';
 
 class Recipe {
   constructor(ingredients, appareils, ustensils) {
