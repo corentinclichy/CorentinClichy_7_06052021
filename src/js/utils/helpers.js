@@ -1,4 +1,4 @@
-import stopWordsFr from "../data/stop_words_french.js";
+import stopWordsFr from '../data/stop_words_french.js';
 
 /**
  * @description
@@ -13,9 +13,9 @@ class Helpers {
   normalize(str) {
     const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
     // Remove Accent
-    str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     // Remove ponctuation
-    str = str.replace(regex, " ").toLowerCase().trim();
+    str = str.replace(regex, ' ').toLowerCase().trim();
     // Return the string
     return str;
   }
@@ -41,9 +41,9 @@ class Helpers {
     // and remove the stop words
     // Then join the array back into a string
     return string
-      .split(" ")
+      .split(' ')
       .filter((item) => !stopWordsFr.includes(item))
-      .join(" ");
+      .join(' ');
   }
 }
 export default Helpers;
